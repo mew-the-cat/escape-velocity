@@ -1,6 +1,19 @@
 import React from 'react';
 import '../styles/App.css';
 
+import {Phase} from './Phase.js';
+import {Player} from './Player.js';
+import {Tile} from './Tile.js';
+
+import {Map} from './Map.js';
+import {StatusBar} from './StatusBar.js';
+import {ActionBar} from './ActionBar.js';
+import {InventoryBar} from './InventoryBar.js';
+import {TileBar} from './TileBar.js';
+
+import {SETTINGS} from './SETTINGS.js';
+import {ITEM_REGISTRY} from './ITEM_REGISTRY.js';
+
 class Game extends React.Component{
     constructor(props){
       super(props);   
@@ -213,179 +226,6 @@ class Game extends React.Component{
       return Math.max(Math.abs(this.state.tiles[col][row].coords.x - this.state.characters[0].coords.x), Math.abs(this.state.tiles[col][row].coords.y - this.state.characters[0].coords.y));   
     }
   
-  }
+  }  
   
-  class Map extends React.Component{
-    constructor(props){
-      super(props);
-    }
-  
-    render() {    
-      var Cells = [];
-      for (var row=0; row<this.props.tiles.length; row++) { 
-        for (var col=0; col<this.props.tiles[row].length; col++){ 
-          var handleClickTileBound = this.props.onClick.bind(this, col, row);                            
-          Cells.push(<Cell key={"Cell" + col + ":"+ row} coords={{x: col, y: row}} characters={this.props.tiles[col][row].characters} onClick={handleClickTileBound} />);         
-        }  
-        Cells.push(<br key={"LineBreak" + row} />);      
-      }
-      return Cells;
-    }
-  }
-  
-  class StatusBar extends React.Component{
-    render(){
-      return(
-      <div>
-        <b>Status bar</b><br />
-        Turn: {this.props.phase.turn} (00:00:0{this.props.phase.untilTextTurn})<br />
-        Action points: {this.props.characters[0].ap} / {SETTINGS.PLAYER_AP_MAX}<br /> 
-        Health points: {this.props.characters[0].hp} / {SETTINGS.PLAYER_HP_MAX}     
-      </div>
-      )
-    }
-  }
-  
-  class ActionBar extends React.Component{
-    render(){
-      return(
-        <div>
-          <b>Actions</b><br/ >
-          <input className="action" type="button" value="Search" onClick={this.props.onClick} />
-        </div>
-      )
-    }
-  }
-  
-  class InventoryBar extends React.Component{
-    render(){
-      var itemListComponents = new Array(this.props.characters[0].inventory.size)
-      for (var i=0; i<itemListComponents.length; i++){
-        var handleClickItemInventoryBound = this.props.onClick.bind(this, i);
-        itemListComponents[i] = <div key={"ItemInventoryDiv" + i} >
-                                  <input className="item"
-                                         type="submit" key={"ItemInventoryInput" + i}  
-                                         value={this.props.characters[0].inventory.slots[i].name} 
-                                         onClick={handleClickItemInventoryBound} />
-                                </div>
-      }
-      return( 
-        <div>
-          <b>Inventory</b><br/ >        
-          {itemListComponents}          
-        </div>
-      )
-    }
-  }
-  
-  class TileBar extends React.Component{
-    render(){ 
-      var x = this.props.characters[0].coords.x;
-      var y = this.props.characters[0].coords.y;
-      var itemListComponents = new Array(this.props.tiles[x][y].items)
-      for (var i=0; i<this.props.tiles[x][y].items.length; i++){
-        var handleClickItemTileBound = this.props.onClick.bind(this, i);
-        itemListComponents[i] = <div key={"ItemTileDiv" + i} >
-                                  <input className="item"
-                                         type="submit" key={"ItemTileInput" + i} 
-                                         value={this.props.tiles[x][y].items[i].name} 
-                                         onClick={handleClickItemTileBound}/>
-                                </div>
-      }      
-      return( 
-        <div>
-          <b>Tile ({this.props.characters[0].coords.x}, {this.props.characters[0].coords.y})</b><br/>         
-          {itemListComponents}          
-        </div>
-      )
-    }
-  }
-  
-  class Cell extends React.Component{
-    constructor(props) {
-      super(props);       
-    }
-  
-    render(){  
-      if (this.props.characters.length === 0){
-        return <button className="cell" onClick={this.props.onClick}>{"(" + this.props.coords.x + ", " + this.props.coords.y + ")"}</button>
-      }
-      else{
-        return <button className="cell-player" onClick={this.props.onClick}>X</button>
-  
-      }
-    }
-      
-  }
-  
-  class Player {
-    constructor(hp, ap, x, y){
-      this.hp = hp;
-      this.ap = ap;
-      this.coords = {
-        x: x,
-        y: y,
-      }
-      this.inventory = new Inventory(6);
-    }  
-  }
-  
-  class Tile {
-    constructor(x, y){    
-      this.coords = {
-        x: x,
-        y: y,
-      }
-      this.characters = [];
-      this.items = [];
-    }    
-  }
-  
-  class Phase {
-    constructor(){
-      this.turn = 1;
-      this.isNight = false;
-    }
-    untilTextTurn = SETTINGS.DURATION_TURN;
-  }
-  
-  class Item {
-    constructor(id, name){
-      this.id = id;
-      this.name = name;
-    }
-  }
-  
-  class Inventory {
-    constructor(inventorySize){
-      this.size = inventorySize;
-      this.slots = new Array(inventorySize);
-      for (var i=0; i<this.slots.length; i++ ){
-        this.slots[i] = ITEM_REGISTRY[0];
-      }
-    }
-  }
-  
-  const ITEM_REGISTRY = [
-    new Item(0, " "),
-    new Item(1, "Log"),
-    new Item(2, "Iron Ore"),
-    new Item(3, "Stone"),
-    new Item(4, "Flint"),
-    new Item(5, "Stick"),
-    new Item(6, "Jade"),
-    new Item(7, "Fruits"),
-    new Item(8, "Nuts"),
-    new Item(9, "Broken metal plates"),
-    new Item(10, "Broken coil"),
-  ]
-  
-  const SETTINGS = {
-    DURATION_TURN: 5,
-    POSITION_START: {x: 5, y: 5},
-    INVENTORY_SIZE: 6,
-    PLAYER_HP_MAX: 100,
-    PLAYER_AP_MAX: 4,
-  }
-
   export default Game;
