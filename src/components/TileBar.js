@@ -13,10 +13,10 @@ export class TileBar extends React.Component{
                                          value={this.props.tiles[x][y].items[i].name} 
                                          onClick={handleClickItemTileBound}/>
                                 </div>
-      }      
+      }     
       return( 
         <div>
-          <b>Tile ({this.props.characters[0].coords.x}, {this.props.characters[0].coords.y})</b><br/>         
+          <b>{this.props.tiles[x][y].type.name} ({x}, {y})</b><br/>         
           {itemListComponents}          
         </div>
       )

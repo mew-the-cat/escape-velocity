@@ -1,6 +1,7 @@
 export class Tile {
-    constructor(x, y){    
-      this.coords = {
+    constructor(type, x, y){   
+      this.type = type; 
+      this.coords = {       
         x: x,
         y: y,
       }

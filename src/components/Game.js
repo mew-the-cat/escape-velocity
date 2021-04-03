@@ -13,6 +13,7 @@ import {TileBar} from './TileBar.js';
 
 import {SETTINGS} from './SETTINGS.js';
 import {ITEM_REGISTRY} from './ITEM_REGISTRY.js';
+import {TILETYPE_REGISTRY} from './TILETYPE_REGISTRY.js';
 
 class Game extends React.Component{
     constructor(props){
@@ -22,21 +23,34 @@ class Game extends React.Component{
       for (var col=0; col<initialTiles.length; col++) {     
         initialTiles[col]=new Array(11);    
         for (var row=0; row<initialTiles[col].length; row++){
-          initialTiles[col][row] = new Tile(col, row);
+          initialTiles[col][row] = new Tile(TILETYPE_REGISTRY[0], col, row);
         }
       }
+      // Set initial tiles
       initialTiles[5][5].characters.push(new Player(SETTINGS.PLAYER_HP_MAX, SETTINGS.PLAYER_AP_MAX, SETTINGS.POSITION_START.x, SETTINGS.POSITION_START.y));  
-  
+      initialTiles[5][5].type = TILETYPE_REGISTRY[1];
+      initialTiles[4][4].type = TILETYPE_REGISTRY[2];
+      initialTiles[5][4].type = TILETYPE_REGISTRY[2];
+      initialTiles[6][4].type = TILETYPE_REGISTRY[2];
+      initialTiles[4][5].type = TILETYPE_REGISTRY[2];
+      initialTiles[6][5].type = TILETYPE_REGISTRY[2];
+      initialTiles[4][6].type = TILETYPE_REGISTRY[2];
+      initialTiles[5][6].type = TILETYPE_REGISTRY[2];
+      initialTiles[6][6].type = TILETYPE_REGISTRY[2];
+      
+
+      // Set initial characters
       var initialCharacters = [];
       initialCharacters.push(new Player(SETTINGS.PLAYER_HP_MAX, SETTINGS.PLAYER_AP_MAX, SETTINGS.POSITION_START.x, SETTINGS.POSITION_START.y));
   
+       // Set initial phase
       var initialPhase = new Phase();
-      
+
       this.state = {
         tiles: initialTiles,
         characters: initialCharacters,
         phase: initialPhase,
-      };      
+      };     
   
       this.handleClickTile = this.handleClickTile.bind(this);    
       this.handleClickSearch = this.handleClickSearch.bind(this);   

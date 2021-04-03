@@ -1,4 +1,4 @@
-.cell{
+.tile-forest{
   width: 50px;
   height: 50px;
   font-size: 9px;
@@ -6,7 +6,39 @@
   color: white;
 }
 
-.cell-player{
+.tile-forest-player{
+  width: 50px;
+  height: 50px;
+  font-size: 9px;
+  background-color: rgb(230, 178, 25);
+  color: white;
+}
+
+.tile-starship{
+  width: 50px;
+  height: 50px;
+  font-size: 9px;
+  background-color: rgb(110, 60, 60);
+  color: white;
+}
+
+.tile-starship-player{
+  width: 50px;
+  height: 50px;
+  font-size: 9px;
+  background-color: rgb(230, 178, 25);
+  color: white;
+}
+
+.tile-impactclearing{
+  width: 50px;
+  height: 50px;
+  font-size: 9px;
+  background-color: rgb(56, 56, 56);
+  color: white;
+}
+
+.tile-impactclearing-player{
   width: 50px;
   height: 50px;
   font-size: 9px;
