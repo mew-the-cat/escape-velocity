@@ -55,38 +55,32 @@ class Game extends React.Component{
       this.handleClickTile = this.handleClickTile.bind(this);    
       this.handleClickSearch = this.handleClickSearch.bind(this);   
       this.handleClickItemInventory = this.handleClickItemInventory.bind(this); 
-      this.handleClickItemTile = this.handleClickItemTile.bind(this); 
-  
+      this.handleClickItemTile = this.handleClickItemTile.bind(this);       
+    }
+
+    componentDidMount(){
       setInterval(this.gameLoop.bind(this), 1000);
     }
   
   
     gameLoop() {   
-      if (this.state.phase.untilTextTurn > 1) {
-        var updatedTiles = this.state.tiles
-        var updatedCharacters = this.state.characters; 
-        var updatedPhase = this.state.phase;
-  
+      if (this.state.phase.untilTextTurn > 1) {           
+        let updatedPhase = this.state.phase;  
         updatedPhase.untilTextTurn -= 1;
+
+        this.setState(updatedPhase);
       }
-      else{
-        var updatedTiles = this.state.tiles
-  
-        var updatedCharacters = this.state.characters;    
-        if (updatedCharacters[0].ap < 4){
-          updatedCharacters[0].ap += 1;
-        }    
-  
-        var updatedPhase = this.state.phase;
+      else{  
+        let updatedPhase = this.state.phase;
         updatedPhase.turn += 1;
-        updatedPhase.untilTextTurn = 5;      
-      }
-  
-      this.setState({
-        tiles: updatedTiles,
-        characters: updatedCharacters,
-        phase: updatedPhase,
-      });    
+        updatedPhase.untilTextTurn = SETTINGS.DURATION_TURN;  
+
+        let updatedCharacters = this.state.characters;    
+        (updatedCharacters[0].ap < 4) && (updatedCharacters[0].ap += 1);         
+
+        this.setState(updatedCharacters);  
+        this.setState(updatedPhase); 
+      }        
     }
   
     render(){      
@@ -122,29 +116,23 @@ class Game extends React.Component{
     handleClickTile(col, row){    
       if (this.state.characters[0].ap > 0){    
         if (this.distCellToCharacter(col, row) === 1){ 
-          this.state.characters[0].ap -= 1;
+          let updatedCharacters = this.state.characters;
+          updatedCharacters[0].ap -= 1;     
+
+          const oldX = this.state.characters[0].coords.x;
+          const oldY = this.state.characters[0].coords.y;
   
-          var oldCoords = this.state.characters[0].coords;
-          var oldX = oldCoords.x;
-          var oldY = oldCoords.y;
-  
-          var updatedCharacters = this.state.characters;
           updatedCharacters[0].coords = {
             x: col, 
             y: row,
           }
   
-          var updatedTiles = this.state.tiles;
+          let updatedTiles = this.state.tiles;
           updatedTiles[oldX][oldY].characters = [];
           updatedTiles[col][row].characters.push(updatedCharacters[0]);
   
-          var updatedPhase = this.state.phase;    
-  
-          this.setState({
-            tiles: updatedTiles,
-            characters: updatedCharacters,
-            phase: updatedPhase,
-          });     
+          this.setState(updatedCharacters);
+          this.setState(updatedTiles);     
         }
       }
       else{
@@ -154,34 +142,26 @@ class Game extends React.Component{
     
     handleClickSearch() {
       if (this.state.characters[0].ap > 0){  
-        this.state.characters[0].ap -= 1 
-        var fillPosition = -1;     
-        for (var i=0; i<this.state.characters[0].inventory.size; i++){
+        let updatedCharacters = this.state.characters;
+        updatedCharacters[0].ap -= 1;        
+
+        let fillPosition = -1;     
+        for (let i=0; i<this.state.characters[0].inventory.size; i++){
           if (this.state.characters[0].inventory.slots[i] === ITEM_REGISTRY[0]){
-            var fillPosition = i;          
+            fillPosition = i;          
             break;
-          }
+          }        
         }
   
         if (fillPosition !== -1){
-          let randomIndex = Math.floor(Math.random() * ITEM_REGISTRY.length);
-        
-          var updatedCharacters = this.state.characters;
-          updatedCharacters[0].inventory.slots[fillPosition] = ITEM_REGISTRY[randomIndex];
-          
-          var updatedTiles = this.state.tiles;
-          var updatedPhase = this.state.phase;    
-  
-          this.setState({
-            tiles: updatedTiles,
-            characters: updatedCharacters,
-            phase: updatedPhase,
-          });     
-        }
+          const randomIndex = Math.floor(Math.random() * ITEM_REGISTRY.length);
+          updatedCharacters[0].inventory.slots[fillPosition] = ITEM_REGISTRY[randomIndex];          
+           
+          this.setState(updatedCharacters);       
+          }    
         else{
           alert("Inventory is full");
-        }    
-        
+        }            
       }
       else{
         alert("You are out of action points");
@@ -189,51 +169,42 @@ class Game extends React.Component{
   }
   
   handleClickItemInventory(slot){  
-    if (this.state.characters[0].inventory.slots[slot].id != ITEM_REGISTRY[0].id){
-      var x = this.state.characters[0].coords.x;
-      var y = this.state.characters[0].coords.y;
+    if (this.state.characters[0].inventory.slots[slot].id !== ITEM_REGISTRY[0].id){
+      const x = this.state.characters[0].coords.x;
+      const y = this.state.characters[0].coords.y;
   
-      var updatedCharacters = this.state.characters; 
-      var updatedTiles = this.state.tiles;
-      var updatedPhase = this.state.phase; 
+      let updatedCharacters = this.state.characters; 
+      let updatedTiles = this.state.tiles;     
   
       updatedTiles[x][y].items.push(this.state.characters[0].inventory.slots[slot])
       updatedCharacters[0].inventory.slots[slot] = ITEM_REGISTRY[0];
   
-      this.setState({
-        tiles: updatedTiles,
-        characters: updatedCharacters,
-        phase: updatedPhase,
-      }); 
+      this.setState(updatedCharacters); 
+      this.setState(updatedTiles); 
     }
   }
     
     handleClickItemTile(slot){  
-        var fillPosition = -1;     
+        let fillPosition = -1;     
         for (var i=0; i<this.state.characters[0].inventory.size; i++){
           if (this.state.characters[0].inventory.slots[i] === ITEM_REGISTRY[0]){
-            var fillPosition = i;          
+            fillPosition = i;          
             break;
           }
-        }
-  
+        }      
         if (fillPosition !== -1){
-          var x = this.state.characters[0].coords.x;
-          var y = this.state.characters[0].coords.y;
+          const x = this.state.characters[0].coords.x;
+          const y = this.state.characters[0].coords.y;
   
-          var updatedCharacters = this.state.characters; 
-          var updatedTiles = this.state.tiles;
-          var updatedPhase = this.state.phase; 
+          let updatedCharacters = this.state.characters; 
+          let updatedTiles = this.state.tiles;         
   
           updatedCharacters[0].inventory.slots[fillPosition] = this.state.tiles[x][y].items[slot];
           updatedTiles[x][y].items.splice(slot, 1);     
   
-          this.setState({
-            tiles: updatedTiles,
-            characters: updatedCharacters,
-            phase: updatedPhase,
-          }); 
-      }
+          this.setState(updatedCharacters);
+          this.setState(updatedTiles);
+        }
     }
   
     distCellToCharacter(col, row){    

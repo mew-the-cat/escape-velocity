@@ -2,11 +2,7 @@ import React from 'react';
 import {Cell} from './Cell.js';
 
 export class Map extends React.Component{
-    constructor(props){
-      super(props);
-    }
-  
-    render() {    
+      render() {    
       var Cells = [];
       for (var row=0; row<this.props.tiles.length; row++) { 
         for (var col=0; col<this.props.tiles[row].length; col++){ 
