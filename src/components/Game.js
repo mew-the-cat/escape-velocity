@@ -153,14 +153,19 @@ class Game extends React.Component{
           }        
         }
   
-        if (fillPosition !== -1){
-          const randomIndex = Math.floor(Math.random() * ITEM_REGISTRY.length);
-          updatedCharacters[0].inventory.slots[fillPosition] = ITEM_REGISTRY[randomIndex];          
+        const randomIndex = Math.floor(Math.random() * ITEM_REGISTRY.length);
+        if (fillPosition !== -1){          
+          updatedCharacters[0].inventory.slots[fillPosition] = ITEM_REGISTRY[randomIndex];         
            
           this.setState(updatedCharacters);       
           }    
         else{
-          alert("Inventory is full");
+          let updatedTiles = this.state.tiles;
+          const x = this.state.characters[0].coords.x;
+          const y = this.state.characters[0].coords.y;
+          updatedTiles[x][y].items.push(ITEM_REGISTRY[randomIndex]);         
+           
+          this.setState(updatedTiles); 
         }            
       }
       else{
