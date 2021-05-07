@@ -1,5 +1,5 @@
 import React from "react";
-import { TILETYPE_REGISTRY } from "./TILETYPE_REGISTRY";
+import { TILETYPE_REGISTRY } from "../models/TILETYPE_REGISTRY";
 
 export class CellTile extends React.Component {
   render() {

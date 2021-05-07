@@ -1,5 +1,5 @@
 import React from "react";
-import { SETTINGS } from "./SETTINGS.js";
+import { SETTINGS } from "../models/SETTINGS.js";
 
 export class StatusBar extends React.Component {
   render() {
