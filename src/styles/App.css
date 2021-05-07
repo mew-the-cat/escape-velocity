@@ -53,6 +53,13 @@
   text-align: left;
 }
 
+.item-panel{
+  width: 200px;
+  max-height: 290px;
+  overflow-y: auto;
+  
+}
+
 .item{
   width: 150px;
   height: 40px;
