@@ -10,15 +10,17 @@ import {StatusBar} from './StatusBar.js';
 import {ActionBar} from './ActionBar.js';
 import {InventoryBar} from './InventoryBar.js';
 import {TileBar} from './TileBar.js';
+import {CraftBar} from './CraftBar.js';
 
 import {SETTINGS} from './SETTINGS.js';
-import {ITEM_REGISTRY} from './ITEM_REGISTRY.js';
+import {ITEM_REGISTRY, generateItem} from './ITEM_REGISTRY.js';
 import {TILETYPE_REGISTRY} from './TILETYPE_REGISTRY.js';
 
 class Game extends React.Component{
     constructor(props){
       super(props);   
   
+      // Set initial tiles
       var initialTiles = new Array(11);
       for (var col=0; col<initialTiles.length; col++) {     
         initialTiles[col]=new Array(11);    
@@ -26,7 +28,7 @@ class Game extends React.Component{
           initialTiles[col][row] = new Tile(TILETYPE_REGISTRY[0], col, row);
         }
       }
-      // Set initial tiles
+
       initialTiles[5][5].characters.push(new Player(SETTINGS.PLAYER_HP_MAX, SETTINGS.PLAYER_AP_MAX, SETTINGS.POSITION_START.x, SETTINGS.POSITION_START.y));  
       initialTiles[5][5].type = TILETYPE_REGISTRY[1];
       initialTiles[4][4].type = TILETYPE_REGISTRY[2];
@@ -36,15 +38,14 @@ class Game extends React.Component{
       initialTiles[6][5].type = TILETYPE_REGISTRY[2];
       initialTiles[4][6].type = TILETYPE_REGISTRY[2];
       initialTiles[5][6].type = TILETYPE_REGISTRY[2];
-      initialTiles[6][6].type = TILETYPE_REGISTRY[2];
-      
+      initialTiles[6][6].type = TILETYPE_REGISTRY[2];      
 
       // Set initial characters
       var initialCharacters = [];
       initialCharacters.push(new Player(SETTINGS.PLAYER_HP_MAX, SETTINGS.PLAYER_AP_MAX, SETTINGS.POSITION_START.x, SETTINGS.POSITION_START.y));
   
        // Set initial phase
-      var initialPhase = new Phase();
+      var initialPhase = new Phase();     
 
       this.state = {
         tiles: initialTiles,
@@ -91,12 +92,12 @@ class Game extends React.Component{
               <td rowSpan="3">
                 <Map tiles={this.state.tiles} onClick={this.handleClickTile} />
               </td>
-              <td colSpan="2" className="aux-window">
+              <td colSpan="3" className="aux-window">
                 <StatusBar phase={this.state.phase} characters={this.state.characters} />
               </td>
             </tr>
             <tr>          
-              <td colSpan="2" className="aux-window">
+              <td colSpan="3" className="aux-window">
                 <ActionBar onClick={this.handleClickSearch} />
               </td>
             </tr>
@@ -106,6 +107,9 @@ class Game extends React.Component{
               </td>
               <td className="aux-window">
                 <TileBar tiles={this.state.tiles} characters={this.state.characters} onClick={this.handleClickItemTile} />
+              </td>
+              <td className="aux-window">
+                <CraftBar />
               </td>
             </tr>
           </tbody>
@@ -155,7 +159,7 @@ class Game extends React.Component{
   
         const randomIndex = Math.floor(Math.random() * ITEM_REGISTRY.length);
         if (fillPosition !== -1){          
-          updatedCharacters[0].inventory.slots[fillPosition] = ITEM_REGISTRY[randomIndex];         
+          updatedCharacters[0].inventory.slots[fillPosition] = generateItem();         
            
           this.setState(updatedCharacters);       
           }    
