@@ -1,5 +1,5 @@
 import React from "react";
-import { Cell } from "./Cell.js";
+import { CellTile } from "./CellTile.js";
 
 export class Map extends React.Component {
   render() {
@@ -8,7 +8,7 @@ export class Map extends React.Component {
       for (var col = 0; col < this.props.tiles[row].length; col++) {
         var handleClickTileBound = this.props.onClick.bind(this, col, row);
         Cells.push(
-          <Cell
+          <CellTile
             key={"Cell" + col + ":" + row}
             coords={{ x: col, y: row }}
             type={this.props.tiles[col][row].type}

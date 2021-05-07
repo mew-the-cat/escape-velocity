@@ -3,13 +3,13 @@ import "../styles/App.css";
 
 import { Phase } from "./Phase.js";
 import { Player } from "./Player.js";
-import { Tile } from "./Tile.js";
+import { Cell } from "./Cell.js";
 
 import { Map } from "./Map.js";
 import { StatusBar } from "./StatusBar.js";
 import { ActionBar } from "./ActionBar.js";
 import { InventoryBar } from "./InventoryBar.js";
-import { TileBar } from "./TileBar.js";
+import { CellBar } from "./CellBar.js";
 import { CraftBar } from "./CraftBar.js";
 
 import { SETTINGS } from "./SETTINGS.js";
@@ -25,7 +25,7 @@ class Game extends React.Component {
     for (var col = 0; col < initialTiles.length; col++) {
       initialTiles[col] = new Array(11);
       for (var row = 0; row < initialTiles[col].length; row++) {
-        initialTiles[col][row] = new Tile(TILETYPE_REGISTRY[0], col, row);
+        initialTiles[col][row] = new Cell(TILETYPE_REGISTRY[0], col, row);
       }
     }
 
@@ -124,7 +124,7 @@ class Game extends React.Component {
               />
             </td>
             <td className="aux-window">
-              <TileBar
+              <CellBar
                 tiles={this.state.tiles}
                 characters={this.state.characters}
                 onClick={this.handleClickItemTile}

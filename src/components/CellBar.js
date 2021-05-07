@@ -1,6 +1,7 @@
 import React from "react";
+import { ItemTile } from "./ItemTile";
 
-export class TileBar extends React.Component {
+export class CellBar extends React.Component {
   render() {
     var x = this.props.characters[0].coords.x;
     var y = this.props.characters[0].coords.y;
@@ -8,15 +9,14 @@ export class TileBar extends React.Component {
     for (var i = 0; i < this.props.tiles[x][y].items.length; i++) {
       var handleClickItemTileBound = this.props.onClick.bind(this, i);
       itemListComponents[i] = (
-        <div key={"ItemTileDiv" + i}>
-          <input
-            className="item"
-            type="submit"
-            key={"ItemTileInput" + i}
-            value={this.props.tiles[x][y].items[i].name}
-            onClick={handleClickItemTileBound}
-          />
-        </div>
+        <ItemTile
+          key={"ItemTileDiv" + i}
+          className="item"
+          type="submit"
+          key={"ItemTileInput" + i}
+          value={this.props.tiles[x][y].items[i].name}
+          onClick={handleClickItemTileBound}
+        />
       );
     }
     return (

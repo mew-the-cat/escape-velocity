@@ -1,4 +1,5 @@
 import React from "react";
+import { ItemTile } from "./ItemTile";
 
 export class InventoryBar extends React.Component {
   render() {
@@ -6,15 +7,13 @@ export class InventoryBar extends React.Component {
     for (var i = 0; i < itemListComponents.length; i++) {
       var handleClickItemInventoryBound = this.props.onClick.bind(this, i);
       itemListComponents[i] = (
-        <div key={"ItemInventoryDiv" + i}>
-          <input
-            className="item"
-            type="submit"
-            key={"ItemInventoryInput" + i}
-            value={this.props.characters[0].inventory.slots[i].name}
-            onClick={handleClickItemInventoryBound}
-          />
-        </div>
+        <ItemTile
+          key={"ItemInventoryDiv" + i}
+          type="submit"
+          key={"ItemInventoryInput" + i}
+          value={this.props.characters[0].inventory.slots[i].name}
+          onClick={handleClickItemInventoryBound}
+        />
       );
     }
     return (

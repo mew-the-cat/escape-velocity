@@ -1,4 +1,4 @@
-.tile-forest{
+.tile-forest {
   width: 50px;
   height: 50px;
   font-size: 9px;
@@ -6,7 +6,7 @@
   color: white;
 }
 
-.tile-forest-player{
+.tile-forest-player {
   width: 50px;
   height: 50px;
   font-size: 9px;
@@ -14,7 +14,7 @@
   color: white;
 }
 
-.tile-starship{
+.tile-starship {
   width: 50px;
   height: 50px;
   font-size: 9px;
@@ -22,7 +22,7 @@
   color: white;
 }
 
-.tile-starship-player{
+.tile-starship-player {
   width: 50px;
   height: 50px;
   font-size: 9px;
@@ -30,7 +30,7 @@
   color: white;
 }
 
-.tile-impactclearing{
+.tile-impactclearing {
   width: 50px;
   height: 50px;
   font-size: 9px;
@@ -38,7 +38,7 @@
   color: white;
 }
 
-.tile-impactclearing-player{
+.tile-impactclearing-player {
   width: 50px;
   height: 50px;
   font-size: 9px;
@@ -46,30 +46,22 @@
   color: white;
 }
 
-.aux-window{
+.aux-window {
   width: 200px;
   padding: 10px 0px 0px 10px;
   vertical-align: top;
   text-align: left;
 }
 
-.item-panel{
+.item-panel {
   width: 200px;
   max-height: 290px;
   overflow-y: auto;
-  
 }
 
-.item{
+.action {
   width: 150px;
   height: 40px;
   margin: 3px 3px 3px 3px;
-  background-color: rgb(225, 137, 155)
-}
-
-.action{
-  width: 150px;
-  height: 40px;
-  margin: 3px 3px 3px 3px;
-  background-color:  rgb(230, 178, 25);
+  background-color: rgb(230, 178, 25);
 }
