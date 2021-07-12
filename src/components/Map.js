@@ -14,7 +14,9 @@ export class Map extends React.Component {
             type={this.props.tiles[col][row].type}
             characters={this.props.tiles[col][row].characters}
             onClick={handleClickTileBound}
-          />
+          >
+            {this.props.tiles[col][row].characters.length !== 0 ? "X" : "(" + col + "," + row + ")"}
+          </CellTile>
         );
       }
       Cells.push(<br key={"LineBreak" + row} />);

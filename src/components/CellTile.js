@@ -1,36 +1,14 @@
 import React from "react";
 import { TILETYPE_REGISTRY } from "../models/TILETYPE_REGISTRY";
+import styled from "styled-components/macro";
 
-export class CellTile extends React.Component {
-  render() {
-    let tileCssClass = "tile";
-    let tileLabel =
-      "(" + this.props.coords.x + ", " + this.props.coords.y + ")";
-
-    switch (this.props.type.name) {
-      case TILETYPE_REGISTRY[0].name:
-        tileCssClass += "-forest";
-        break;
-      case TILETYPE_REGISTRY[1].name:
-        tileCssClass += "-starship";
-        break;
-      case TILETYPE_REGISTRY[2].name:
-        tileCssClass += "-impactclearing";
-        break;
-      default:
-        tileCssClass += "";
-        break;
-    }
-
-    if (this.props.characters.length !== 0) {
-      tileCssClass += "-player";
-      tileLabel = "X";
-    }
-
-    return (
-      <button className={tileCssClass} onClick={this.props.onClick}>
-        {tileLabel}
-      </button>
-    );
-  }
-}
+export const CellTile = styled.button`
+  width: 50px;
+  height: 50px;
+  font-size: ${(props) => props.characters.length ===0 ? "8px" : "8px"}; 
+  background: ${(props) => props.characters.length ===0 ? props.type.color : "repeating-linear-gradient(45deg, white, white 10px, " + props.type.color + " 10px,  " + props.type.color + " 20px)"};
+  color: ${(props) => props.characters.length ===0 ? "black" : "white"};
+  font-weight: ${(props) => props.characters.length ===0 ? "normal" : "bold"};
+  border: ${(props) => props.characters.length ===0 ? "1px black" : "3px white"}
+  border-collapse: collapse;  
+`;
