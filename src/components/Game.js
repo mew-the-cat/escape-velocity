@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/App.css";
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import { Phase } from "../models/Phase.js";
 import { Player } from "../models/Player.js";
