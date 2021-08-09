@@ -1,6 +1,5 @@
 import React from "react";
 import "../styles/App.css";
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import { Phase } from "../models/Phase.js";
 import { Player } from "../models/Player.js";
@@ -232,9 +231,8 @@ class Game extends React.Component {
       let updatedCharacters = this.state.characters;
       let updatedTiles = this.state.tiles;
 
-      updatedCharacters[0].inventory.slots[fillPosition] = this.state.tiles[x][
-        y
-      ].items[slot];
+      updatedCharacters[0].inventory.slots[fillPosition] =
+        this.state.tiles[x][y].items[slot];
       updatedTiles[x][y].items.splice(slot, 1);
 
       this.setState(updatedCharacters);
