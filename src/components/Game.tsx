@@ -6,18 +6,26 @@ import { Player } from "../models/Player";
 import { Cell } from "../models/Cell";
 
 import { Map } from "./Map.js";
-import { StatusBar } from "./StatusBar.tsx";
-import { ActionBar } from "./ActionBar.tsx";
+import { StatusBar } from "./StatusBar";
+import { ActionBar } from "./ActionBar";
 import { InventoryBar } from "./InventoryBar.js";
 import { CellBar } from "./CellBar.js";
 import { CraftBar } from "./CraftBar.js";
 
-import { SETTINGS } from "../constants/SETTINGS.ts";
-import { ITEM_REGISTRY, generateItem } from "../constants/ITEM_REGISTRY.ts";
-import { TILETYPE_REGISTRY } from "../constants/TILETYPE_REGISTRY.ts";
+import { SETTINGS } from "../constants/SETTINGS";
+import { ITEM_REGISTRY, generateItem } from "../constants/ITEM_REGISTRY";
+import { TILETYPE_REGISTRY } from "../constants/TILETYPE_REGISTRY";
 
-class Game extends React.Component {
-  constructor(props) {
+interface GameProps {}
+
+interface GameState {
+  characters: Player[];
+  phase: Phase;
+  tiles: Cell[][];
+}
+
+class Game extends React.Component<GameProps, GameState> {
+  constructor(props: GameProps) {
     super(props);
 
     // Set initial tiles
@@ -78,21 +86,20 @@ class Game extends React.Component {
   }
 
   gameLoop() {
-    if (this.state.phase.untilTextTurn > 1) {
+    if (this.state.phase.untilNextTurn > 1) {
       let updatedPhase = this.state.phase;
-      updatedPhase.untilTextTurn -= 1;
+      updatedPhase.untilNextTurn -= 1;
 
-      this.setState(updatedPhase);
+      this.setState({ phase: updatedPhase });
     } else {
       let updatedPhase = this.state.phase;
       updatedPhase.turn += 1;
-      updatedPhase.untilTextTurn = SETTINGS.DURATION_TURN;
+      updatedPhase.untilNextTurn = SETTINGS.DURATION_TURN;
 
       let updatedCharacters = this.state.characters;
       updatedCharacters[0].ap < 4 && (updatedCharacters[0].ap += 1);
 
-      this.setState(updatedCharacters);
-      this.setState(updatedPhase);
+      this.setState({ characters: updatedCharacters, phase: updatedPhase });
     }
   }
 
@@ -101,10 +108,10 @@ class Game extends React.Component {
       <table>
         <tbody>
           <tr>
-            <td rowSpan="3">
+            <td rowSpan={3}>
               <Map tiles={this.state.tiles} onClick={this.handleClickTile} />
             </td>
-            <td colSpan="3" className="aux-window">
+            <td colSpan={3} className="aux-window">
               <StatusBar
                 phase={this.state.phase}
                 characters={this.state.characters}
@@ -112,7 +119,7 @@ class Game extends React.Component {
             </td>
           </tr>
           <tr>
-            <td colSpan="3" className="aux-window">
+            <td colSpan={3} className="aux-window">
               <ActionBar onClick={this.handleClickSearch} />
             </td>
           </tr>
@@ -139,7 +146,7 @@ class Game extends React.Component {
     );
   }
 
-  handleClickTile(col, row) {
+  handleClickTile(col: number, row: number) {
     if (this.state.characters[0].ap > 0) {
       if (this.distCellToCharacter(col, row) === 1) {
         let updatedCharacters = this.state.characters;
@@ -157,8 +164,7 @@ class Game extends React.Component {
         updatedTiles[oldX][oldY].characters = [];
         updatedTiles[col][row].characters.push(updatedCharacters[0]);
 
-        this.setState(updatedCharacters);
-        this.setState(updatedTiles);
+        this.setState({ characters: updatedCharacters, tiles: updatedTiles });
       }
     } else {
       alert("You are out of action points");
@@ -182,21 +188,21 @@ class Game extends React.Component {
       if (fillPosition !== -1) {
         updatedCharacters[0].inventory.slots[fillPosition] = generateItem();
 
-        this.setState(updatedCharacters);
+        this.setState({ characters: updatedCharacters });
       } else {
         let updatedTiles = this.state.tiles;
         const x = this.state.characters[0].coords.x;
         const y = this.state.characters[0].coords.y;
         updatedTiles[x][y].items.push(ITEM_REGISTRY[randomIndex]);
 
-        this.setState(updatedTiles);
+        this.setState({ tiles: updatedTiles });
       }
     } else {
       alert("You are out of action points");
     }
   }
 
-  handleClickItemInventory(slot) {
+  handleClickItemInventory(slot: number) {
     if (
       this.state.characters[0].inventory.slots[slot].id !== ITEM_REGISTRY[0].id
     ) {
@@ -211,12 +217,11 @@ class Game extends React.Component {
       );
       updatedCharacters[0].inventory.slots[slot] = ITEM_REGISTRY[0];
 
-      this.setState(updatedCharacters);
-      this.setState(updatedTiles);
+      this.setState({ characters: updatedCharacters, tiles: updatedTiles });
     }
   }
 
-  handleClickItemTile(slot) {
+  handleClickItemTile(slot: number) {
     let fillPosition = -1;
     for (var i = 0; i < this.state.characters[0].inventory.size; i++) {
       if (this.state.characters[0].inventory.slots[i] === ITEM_REGISTRY[0]) {
@@ -235,12 +240,11 @@ class Game extends React.Component {
         this.state.tiles[x][y].items[slot];
       updatedTiles[x][y].items.splice(slot, 1);
 
-      this.setState(updatedCharacters);
-      this.setState(updatedTiles);
+      this.setState({ characters: updatedCharacters, tiles: updatedTiles });
     }
   }
 
-  distCellToCharacter(col, row) {
+  distCellToCharacter(col: number, row: number) {
     return Math.max(
       Math.abs(
         this.state.tiles[col][row].coords.x - this.state.characters[0].coords.x
