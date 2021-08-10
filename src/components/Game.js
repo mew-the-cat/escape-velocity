@@ -1,9 +1,9 @@
 import React from "react";
 import "../styles/App.css";
 
-import { Phase } from "../models/Phase.js";
-import { Player } from "../models/Player.js";
-import { Cell } from "../models/Cell.js";
+import { Phase } from "../models/Phase";
+import { Player } from "../models/Player";
+import { Cell } from "../models/Cell";
 
 import { Map } from "./Map.js";
 import { StatusBar } from "./StatusBar.tsx";
@@ -12,9 +12,9 @@ import { InventoryBar } from "./InventoryBar.js";
 import { CellBar } from "./CellBar.js";
 import { CraftBar } from "./CraftBar.js";
 
-import { SETTINGS } from "../constants/SETTINGS.js";
-import { ITEM_REGISTRY, generateItem } from "../constants/ITEM_REGISTRY.js";
-import { TILETYPE_REGISTRY } from "../constants/TILETYPE_REGISTRY";
+import { SETTINGS } from "../constants/SETTINGS.ts";
+import { ITEM_REGISTRY, generateItem } from "../constants/ITEM_REGISTRY.ts";
+import { TILETYPE_REGISTRY } from "../constants/TILETYPE_REGISTRY.ts";
 
 class Game extends React.Component {
   constructor(props) {

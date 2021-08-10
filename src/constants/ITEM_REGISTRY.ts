@@ -1,5 +1,5 @@
-import { Item } from "../models/Item.js";
-import { SETTINGS } from "./SETTINGS.js";
+import { Item } from "../models/Item";
+import { SETTINGS } from "./SETTINGS";
 
 export const ITEM_REGISTRY = [
   new Item(0, " ", -1),
@@ -13,7 +13,7 @@ export const ITEM_REGISTRY = [
   new Item(8, "Transistor Radio", 999),
 ];
 
-export const generateItem = () => {
+export const generateItem = (): Item => {
   const randomNumber = 100 * Math.random();
   for (
     let frequency = 0;
@@ -31,9 +31,10 @@ export const generateItem = () => {
       return randomItem;
     }
   }
+  return ITEM_REGISTRY[0];
 };
 
-const generateItemSubset = (frequency) => {
+const generateItemSubset = (frequency: number): Item[] => {
   let itemSubset = [];
   for (let i = 0; i < ITEM_REGISTRY.length; i++) {
     if (ITEM_REGISTRY[i].frequency === frequency) {

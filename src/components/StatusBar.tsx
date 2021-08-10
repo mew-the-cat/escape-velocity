@@ -1,7 +1,7 @@
 import React from "react";
-import { Phase } from "../models/Phase.js";
+import { Phase } from "../models/Phase";
 import { Player } from "../models/Player.js";
-import { SETTINGS } from "../constants/SETTINGS.js";
+import { SETTINGS } from "../constants/SETTINGS";
 
 interface StatusBarProps {
   phase: Phase;
@@ -14,7 +14,7 @@ export class StatusBar extends React.Component<StatusBarProps> {
       <div>
         <b>Status bar</b>
         <br />
-        Turn: {this.props.phase.turn} (00:00:0{this.props.phase.untilTextTurn})
+        Turn: {this.props.phase.turn} (00:00:0{this.props.phase.untilNextTurn})
         <br />
         Action points: {this.props.characters[0].ap} / {SETTINGS.PLAYER_AP_MAX}
         <br />
