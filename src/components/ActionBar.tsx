@@ -1,6 +1,10 @@
 import React from "react";
 
-export class ActionBar extends React.Component {
+interface ActionBarProps {
+  onClick: React.MouseEventHandler;
+}
+
+export class ActionBar extends React.Component<ActionBarProps> {
   render() {
     return (
       <div>

@@ -7,7 +7,7 @@ import { Cell } from "../models/Cell.js";
 
 import { Map } from "./Map.js";
 import { StatusBar } from "./StatusBar.js";
-import { ActionBar } from "./ActionBar.js";
+import { ActionBar } from "./ActionBar.tsx";
 import { InventoryBar } from "./InventoryBar.js";
 import { CellBar } from "./CellBar.js";
 import { CraftBar } from "./CraftBar.js";

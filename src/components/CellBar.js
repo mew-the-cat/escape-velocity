@@ -10,7 +10,6 @@ export class CellBar extends React.Component {
       var handleClickItemTileBound = this.props.onClick.bind(this, i);
       itemListComponents[i] = (
         <ItemTile
-          key={"ItemTileDiv" + i}
           className="item"
           type="submit"
           key={"ItemTileInput" + i}

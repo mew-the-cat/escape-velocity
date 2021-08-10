@@ -8,7 +8,6 @@ export class InventoryBar extends React.Component {
       var handleClickItemInventoryBound = this.props.onClick.bind(this, i);
       itemListComponents[i] = (
         <ItemTile
-          key={"ItemInventoryDiv" + i}
           type="submit"
           key={"ItemInventoryInput" + i}
           value={this.props.characters[0].inventory.slots[i].name}
