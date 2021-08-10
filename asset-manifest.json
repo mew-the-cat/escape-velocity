@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/escape-velocity/static/css/main.f846ea63.chunk.css",
-    "main.js": "/escape-velocity/static/js/main.13eb2486.chunk.js",
-    "main.js.map": "/escape-velocity/static/js/main.13eb2486.chunk.js.map",
+    "main.js": "/escape-velocity/static/js/main.62255577.chunk.js",
+    "main.js.map": "/escape-velocity/static/js/main.62255577.chunk.js.map",
     "runtime-main.js": "/escape-velocity/static/js/runtime-main.2d035db1.js",
     "runtime-main.js.map": "/escape-velocity/static/js/runtime-main.2d035db1.js.map",
     "static/js/2.6924f4a3.chunk.js": "/escape-velocity/static/js/2.6924f4a3.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.2d035db1.js",
     "static/js/2.6924f4a3.chunk.js",
     "static/css/main.f846ea63.chunk.css",
-    "static/js/main.13eb2486.chunk.js"
+    "static/js/main.62255577.chunk.js"
   ]
 }
