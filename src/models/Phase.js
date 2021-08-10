@@ -1,4 +1,4 @@
-import { SETTINGS } from "./SETTINGS.js";
+import { SETTINGS } from "../constants/SETTINGS.js";
 
 export class Phase {
   constructor() {

@@ -1,5 +1,5 @@
 import React from "react";
-import { CellTile } from "./CellTile.js";
+import { CellTile } from "./CellTile.tsx";
 
 export class Map extends React.Component {
   render() {
@@ -15,7 +15,9 @@ export class Map extends React.Component {
             characters={this.props.tiles[col][row].characters}
             onClick={handleClickTileBound}
           >
-            {this.props.tiles[col][row].characters.length !== 0 ? "X" : "(" + col + "," + row + ")"}
+            {this.props.tiles[col][row].characters.length !== 0
+              ? "X"
+              : "(" + col + "," + row + ")"}
           </CellTile>
         );
       }

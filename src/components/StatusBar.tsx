@@ -1,7 +1,14 @@
 import React from "react";
-import { SETTINGS } from "../models/SETTINGS.js";
+import { Phase } from "../models/Phase.js";
+import { Player } from "../models/Player.js";
+import { SETTINGS } from "../constants/SETTINGS.js";
 
-export class StatusBar extends React.Component {
+interface StatusBarProps {
+  phase: Phase;
+  characters: Player[];
+}
+
+export class StatusBar extends React.Component<StatusBarProps> {
   render() {
     return (
       <div>

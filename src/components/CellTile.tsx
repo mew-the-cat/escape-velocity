@@ -1,6 +1,13 @@
-import styled from "styled-components/macro";
+import styled from "styled-components";
+import { Player } from "../models/Player";
+import { Tiletype } from "../models/Tiletype";
 
-export const CellTile = styled.button`
+interface CellTileProps {
+  characters: Player[];
+  type: Tiletype;
+}
+
+export const CellTile = styled.button<CellTileProps>`
   width: 50px;
   height: 50px;
   font-size: ${(props) => (props.characters.length === 0 ? "8px" : "8px")};

@@ -1,4 +1,4 @@
-import { Item } from "./Item.js";
+import { Item } from "../models/Item.js";
 import { SETTINGS } from "./SETTINGS.js";
 
 export const ITEM_REGISTRY = [

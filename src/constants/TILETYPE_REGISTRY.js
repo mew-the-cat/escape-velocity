@@ -1,4 +1,4 @@
-import { Tiletype } from "./Tiletype.js";
+import { Tiletype } from "../models/Tiletype.js";
 
 export const TILETYPE_REGISTRY = [
   new Tiletype(0, "Forest", "#32a871"),

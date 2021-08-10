@@ -1,4 +1,4 @@
-import { ITEM_REGISTRY } from "./ITEM_REGISTRY.js";
+import { ITEM_REGISTRY } from "../constants/ITEM_REGISTRY.js";
 
 export class Inventory {
   constructor(inventorySize) {
