@@ -5,12 +5,12 @@ import { Phase } from "../models/Phase";
 import { Player } from "../models/Player";
 import { Cell } from "../models/Cell";
 
-import { Map } from "./Map.js";
+import { Map } from "./Map";
 import { StatusBar } from "./StatusBar";
 import { ActionBar } from "./ActionBar";
-import { InventoryBar } from "./InventoryBar.js";
-import { CellBar } from "./CellBar.js";
-import { CraftBar } from "./CraftBar.js";
+import { InventoryBar } from "./InventoryBar";
+import { CellBar } from "./CellBar";
+import { CraftBar } from "./CraftBar";
 
 import { SETTINGS } from "../constants/SETTINGS";
 import { ITEM_REGISTRY, generateItem } from "../constants/ITEM_REGISTRY";

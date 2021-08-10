@@ -1,7 +1,13 @@
 import React from "react";
+import { Player } from "../models/Player";
 import { ItemTile } from "./ItemTile";
 
-export class InventoryBar extends React.Component {
+interface InventoryBarProps {
+  characters: Player[];
+  onClick: (slot: number) => void;
+}
+
+export class InventoryBar extends React.Component<InventoryBarProps> {
   render() {
     var itemListComponents = new Array(this.props.characters[0].inventory.size);
     for (var i = 0; i < itemListComponents.length; i++) {

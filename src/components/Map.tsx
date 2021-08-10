@@ -1,7 +1,13 @@
 import React from "react";
-import { CellTile } from "./CellTile.tsx";
+import { Cell } from "../models/Cell";
+import { CellTile } from "./CellTile";
 
-export class Map extends React.Component {
+interface MapProps {
+  tiles: Cell[][];
+  onClick: (col: number, row: number) => void;
+}
+
+export class Map extends React.Component<MapProps> {
   render() {
     var Cells = [];
     for (var row = 0; row < this.props.tiles.length; row++) {
@@ -10,8 +16,7 @@ export class Map extends React.Component {
         Cells.push(
           <CellTile
             key={"Cell" + col + ":" + row}
-            coords={{ x: col, y: row }}
-            type={this.props.tiles[col][row].type}
+            tiletype={this.props.tiles[col][row].type}
             characters={this.props.tiles[col][row].characters}
             onClick={handleClickTileBound}
           >
