@@ -1,12 +1,10 @@
 import React from "react";
 
-export class CraftBar extends React.Component {
-  render() {
-    return (
-      <div>
-        <b>Craft</b>
-        <br />
-      </div>
-    );
-  }
-}
+export const CraftBar: React.FC = () => {
+  return (
+    <div>
+      <b>Craft</b>
+      <br />
+    </div>
+  );
+};

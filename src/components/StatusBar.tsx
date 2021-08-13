@@ -8,22 +8,20 @@ interface StatusBarProps {
   characters: Player[];
 }
 
-export class StatusBar extends React.Component<StatusBarProps> {
-  render() {
-    return (
-      <div>
-        <b>Status bar</b>
-        <br />
-        Turn: {this.props.phase.turn} (00:00:0{this.props.phase.untilNextTurn})
-        <br />
-        Action Points: {this.props.characters[0].ap} / {SETTINGS.PLAYER_AP_MAX}
-        <br />
-        Health Points: {this.props.characters[0].hp} / {SETTINGS.PLAYER_HP_MAX}
-        <br />
-        <br />
-        <br />
-        <br />
-      </div>
-    );
-  }
-}
+export const StatusBar: React.FC<StatusBarProps> = ({ phase, characters }) => {
+  return (
+    <div>
+      <b>Status bar</b>
+      <br />
+      Turn: {phase.turn} (00:00:0{phase.untilNextTurn})
+      <br />
+      Action Points: {characters[0].ap} / {SETTINGS.PLAYER_AP_MAX}
+      <br />
+      Health Points: {characters[0].hp} / {SETTINGS.PLAYER_HP_MAX}
+      <br />
+      <br />
+      <br />
+      <br />
+    </div>
+  );
+};
