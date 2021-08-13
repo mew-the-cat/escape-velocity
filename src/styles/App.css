@@ -38,3 +38,7 @@
   border: 2px solid rgb(204, 242, 255);
   color: white;
 }
+
+td {
+  border: 0px;
+}
