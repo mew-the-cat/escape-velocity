@@ -124,7 +124,7 @@ class Game extends React.Component<GameProps, GameState> {
               </td>
               <td colSpan={2} className="window-aux-alert">
                 <AlertBar
-                  alertText={ALERT_TEXTS.OUT_OF_AP}
+                  alertText={this.state.phase.alertActive}
                   isVisible={this.state.phase.untilAlertDismissed > 0}
                 />
               </td>

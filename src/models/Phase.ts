@@ -14,7 +14,7 @@ export class Phase {
     this.untilNextTurn = SETTINGS.DURATION_TURN;
     this.isNight = false;
     this.untilAlertDismissed = 0;
-    this.alertActive = ALERT_TEXTS.EMPTY;
-    this.untilAlertDismissed = 0;
+    this.alertActive = ALERT_TEXTS.START;
+    this.untilAlertDismissed = 1200;
   }
 }
