@@ -25,4 +25,5 @@ export const CellTile = styled.button<CellTileProps>`
     props.characters.length === 0 ? "normal" : "bold"};
   border: 1px solid white;
   border-collapse: collapse;
+  border-radius: 5px;
 `;

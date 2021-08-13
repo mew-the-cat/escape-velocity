@@ -7,4 +7,5 @@ export const SETTINGS = {
   ITEM_SEARCH_FREQUENCY_THRESHOLDS: [
     0, 60, 90, 100, 100, 100, 100, 100, 100, 100, 100,
   ],
+  DURATION_ALERT: 5,
 };

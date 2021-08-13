@@ -27,7 +27,7 @@ export const generateItem = (): Item => {
       const itemSubset = generateItemSubset(frequency);
       const randomIndex = Math.floor(Math.random() * itemSubset.length);
       const randomItem = itemSubset[randomIndex];
-      console.log(randomNumber + "    " + frequency + "    " + randomItem);
+      //console.log(randomNumber + "    " + frequency + "    " + randomItem);
       return randomItem;
     }
   }

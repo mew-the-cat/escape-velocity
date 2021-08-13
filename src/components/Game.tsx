@@ -15,6 +15,9 @@ import { CraftBar } from "./CraftBar";
 import { SETTINGS } from "../constants/SETTINGS";
 import { ITEM_REGISTRY, generateItem } from "../constants/ITEM_REGISTRY";
 import { TILETYPE_REGISTRY } from "../constants/TILETYPE_REGISTRY";
+import { AlertBar } from "./AlertBar";
+import { ALERT_TEXTS } from "../constants/ALERT_TEXTS";
+import { AlertText } from "../models/AlertText";
 
 interface GameProps {}
 
@@ -86,63 +89,72 @@ class Game extends React.Component<GameProps, GameState> {
   }
 
   gameLoop() {
-    if (this.state.phase.untilNextTurn > 1) {
-      let updatedPhase = this.state.phase;
-      updatedPhase.untilNextTurn -= 1;
+    const updatedCharacters = this.state.characters;
+    const updatedPhase = this.state.phase;
 
-      this.setState({ phase: updatedPhase });
+    if (this.state.phase.untilNextTurn > 1) {
+      updatedPhase.untilNextTurn -= 1;
     } else {
-      let updatedPhase = this.state.phase;
       updatedPhase.turn += 1;
       updatedPhase.untilNextTurn = SETTINGS.DURATION_TURN;
-
-      let updatedCharacters = this.state.characters;
       updatedCharacters[0].ap < 4 && (updatedCharacters[0].ap += 1);
-
-      this.setState({ characters: updatedCharacters, phase: updatedPhase });
     }
+
+    if (updatedPhase.untilAlertDismissed > 0) {
+      updatedPhase.untilAlertDismissed -= 1;
+    }
+
+    this.setState({ characters: updatedCharacters, phase: updatedPhase });
   }
 
   render() {
     return (
-      <table>
-        <tbody>
-          <tr>
-            <td rowSpan={3}>
-              <Map tiles={this.state.tiles} onClick={this.handleClickTile} />
-            </td>
-            <td colSpan={3} className="aux-window">
-              <StatusBar
-                phase={this.state.phase}
-                characters={this.state.characters}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td colSpan={3} className="aux-window">
-              <ActionBar onClick={this.handleClickSearch} />
-            </td>
-          </tr>
-          <tr>
-            <td className="aux-window">
-              <InventoryBar
-                characters={this.state.characters}
-                onClick={this.handleClickItemInventory}
-              />
-            </td>
-            <td className="aux-window">
-              <CellBar
-                tiles={this.state.tiles}
-                characters={this.state.characters}
-                onClick={this.handleClickItemTile}
-              />
-            </td>
-            <td className="aux-window">
-              <CraftBar />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div className="window">
+        <table>
+          <tbody>
+            <tr>
+              <td rowSpan={3}>
+                <Map tiles={this.state.tiles} onClick={this.handleClickTile} />
+              </td>
+              <td colSpan={1} className="window-aux">
+                <StatusBar
+                  phase={this.state.phase}
+                  characters={this.state.characters}
+                />
+              </td>
+              <td colSpan={2} className="window-aux-alert">
+                <AlertBar
+                  alertText={ALERT_TEXTS.OUT_OF_AP}
+                  isVisible={this.state.phase.untilAlertDismissed > 0}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td colSpan={3} className="window-aux">
+                <ActionBar onClick={this.handleClickSearch} />
+              </td>
+            </tr>
+            <tr>
+              <td className="window-aux">
+                <InventoryBar
+                  characters={this.state.characters}
+                  onClick={this.handleClickItemInventory}
+                />
+              </td>
+              <td className="window-aux">
+                <CellBar
+                  tiles={this.state.tiles}
+                  characters={this.state.characters}
+                  onClick={this.handleClickItemTile}
+                />
+              </td>
+              <td className="window-aux">
+                <CraftBar />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     );
   }
 
@@ -167,7 +179,7 @@ class Game extends React.Component<GameProps, GameState> {
         this.setState({ characters: updatedCharacters, tiles: updatedTiles });
       }
     } else {
-      alert("You are out of action points");
+      this.handleDisplayAlert(ALERT_TEXTS.OUT_OF_AP);
     }
   }
 
@@ -198,7 +210,7 @@ class Game extends React.Component<GameProps, GameState> {
         this.setState({ tiles: updatedTiles });
       }
     } else {
-      alert("You are out of action points");
+      this.handleDisplayAlert(ALERT_TEXTS.OUT_OF_AP);
     }
   }
 
@@ -242,6 +254,13 @@ class Game extends React.Component<GameProps, GameState> {
 
       this.setState({ characters: updatedCharacters, tiles: updatedTiles });
     }
+  }
+
+  handleDisplayAlert(alert: AlertText) {
+    const updatedPhase = this.state.phase;
+    updatedPhase.alertActive = alert;
+    updatedPhase.untilAlertDismissed = SETTINGS.DURATION_ALERT;
+    this.setState({ phase: updatedPhase });
   }
 
   distCellToCharacter(col: number, row: number) {

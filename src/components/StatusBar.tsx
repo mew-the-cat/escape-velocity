@@ -16,9 +16,13 @@ export class StatusBar extends React.Component<StatusBarProps> {
         <br />
         Turn: {this.props.phase.turn} (00:00:0{this.props.phase.untilNextTurn})
         <br />
-        Action points: {this.props.characters[0].ap} / {SETTINGS.PLAYER_AP_MAX}
+        Action Points: {this.props.characters[0].ap} / {SETTINGS.PLAYER_AP_MAX}
         <br />
-        Health points: {this.props.characters[0].hp} / {SETTINGS.PLAYER_HP_MAX}
+        Health Points: {this.props.characters[0].hp} / {SETTINGS.PLAYER_HP_MAX}
+        <br />
+        <br />
+        <br />
+        <br />
       </div>
     );
   }
