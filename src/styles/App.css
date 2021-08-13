@@ -1,8 +1,26 @@
-.aux-window {
+.window {
+  width: 66%;
+  margin: 20px;
+  padding: 20px;
+  border: 3px green solid;
+  border-radius: 5px;
+}
+
+.window-aux {
   width: 200px;
   padding: 10px 0px 0px 10px;
-  vertical-align: top;
+  vertical-align: 100%;
   text-align: left;
+  margin: 20px;
+}
+
+.window-aux-alert {
+  width: 200px;
+  padding: 10px 0px 0px 10px;
+  vertical-align: 100%;
+  text-align: left;
+  margin: 20px;
+  vertical-align: middle;
 }
 
 .item-panel {
@@ -12,8 +30,15 @@
 }
 
 .action {
-  width: 150px;
+  width: 29%;
   height: 40px;
   margin: 3px 3px 3px 3px;
-  background-color: rgb(230, 178, 25);
+  background-color: rgb(102, 217, 255);
+  border-radius: 5px;
+  border: 2px solid rgb(204, 242, 255);
+  color: white;
+}
+
+td {
+  border: 2px solid black;
 }
