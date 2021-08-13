@@ -38,11 +38,3 @@
   border: 2px solid rgb(204, 242, 255);
   color: white;
 }
-
-.alert {
-  margin: 0px;
-}
-
-.alert-heading .h4 {
-  font-size: 1rem;
-}

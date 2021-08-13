@@ -11,4 +11,5 @@ You find yourself in the middle of the endless jungle covering essentially the e
 
 ## How to Play
 
-Simple navigate with a browser to `https://ai-dar.github.io/escape-velocity/`
+Simple navigate with a browser to
+`https://ai-dar.github.io/escape-velocity/`
