@@ -139,6 +139,7 @@ class Game extends React.Component<GameProps, GameState> {
                 <InventoryBarWrapper
                   characters={this.state.characters}
                   onClick={this.handleClickItemInventory}
+                  onDragEnd={this.handleDragEnd.bind(this)}
                 />
               </td>
               <td className="window-aux">
@@ -261,6 +262,18 @@ class Game extends React.Component<GameProps, GameState> {
     updatedPhase.alertActive = alert;
     updatedPhase.untilAlertDismissed = SETTINGS.DURATION_ALERT;
     this.setState({ phase: updatedPhase });
+  }
+
+  handleDragEnd(result: any) {
+    if (!result.destination) return;
+
+    const items = Array.from(this.state.characters[0].inventory.slots);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    let updatedCharacters = this.state.characters;
+    updatedCharacters[0].inventory.slots = items;
+    this.setState({ characters: updatedCharacters });
   }
 
   distCellToCharacter(col: number, row: number) {
