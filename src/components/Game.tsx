@@ -8,7 +8,7 @@ import { Cell } from "../models/Cell";
 import { Map } from "./Map";
 import { StatusBar } from "./StatusBar";
 import { ActionBar } from "./ActionBar";
-import { InventoryBar } from "./InventoryBar";
+import { InventoryBarWrapper } from "./InventoryBarWrapper";
 import { CellBar } from "./CellBar";
 import { CraftBar } from "./CraftBar";
 
@@ -136,7 +136,7 @@ class Game extends React.Component<GameProps, GameState> {
             </tr>
             <tr>
               <td className="window-aux">
-                <InventoryBar
+                <InventoryBarWrapper
                   characters={this.state.characters}
                   onClick={this.handleClickItemInventory}
                 />

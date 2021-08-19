@@ -42,3 +42,11 @@
 td {
   border: 0px;
 }
+
+ul,
+ol,
+li {
+  list-style: none;
+  margin-left: -1em;
+  padding-left: 0;
+}
