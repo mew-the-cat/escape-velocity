@@ -9,10 +9,10 @@ interface MapProps {
 
 export class Map extends React.Component<MapProps> {
   render() {
-    var Cells = [];
-    for (var row = 0; row < this.props.tiles.length; row++) {
-      for (var col = 0; col < this.props.tiles[row].length; col++) {
-        var handleClickTileBound = this.props.onClick.bind(this, col, row);
+    const Cells = [];
+    for (let row = 0; row < this.props.tiles.length; row++) {
+      for (let col = 0; col < this.props.tiles[row].length; col++) {
+        const handleClickTileBound = this.props.onClick.bind(this, col, row);
         Cells.push(
           <CellTile
             key={"Cell" + col + ":" + row}

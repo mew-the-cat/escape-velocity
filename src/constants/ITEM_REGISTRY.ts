@@ -1,5 +1,4 @@
 import { Item } from "../models/Item";
-import { SETTINGS } from "./SETTINGS";
 
 export const ITEM_REGISTRY = [
   new Item(0, " ", -1),
@@ -12,34 +11,3 @@ export const ITEM_REGISTRY = [
   new Item(7, "Electronic Component", 2),
   new Item(8, "Transistor Radio", 999),
 ];
-
-export const generateItem = (): Item => {
-  const randomNumber = 100 * Math.random();
-  for (
-    let frequency = 0;
-    frequency < SETTINGS.ITEM_SEARCH_FREQUENCY_THRESHOLDS.length - 1;
-    frequency++
-  ) {
-    if (
-      randomNumber > SETTINGS.ITEM_SEARCH_FREQUENCY_THRESHOLDS[frequency] &&
-      randomNumber < SETTINGS.ITEM_SEARCH_FREQUENCY_THRESHOLDS[frequency + 1]
-    ) {
-      const itemSubset = generateItemSubset(frequency);
-      const randomIndex = Math.floor(Math.random() * itemSubset.length);
-      const randomItem = itemSubset[randomIndex];
-      //console.log(randomNumber + "    " + frequency + "    " + randomItem);
-      return randomItem;
-    }
-  }
-  return ITEM_REGISTRY[0];
-};
-
-const generateItemSubset = (frequency: number): Item[] => {
-  let itemSubset = [];
-  for (let i = 0; i < ITEM_REGISTRY.length; i++) {
-    if (ITEM_REGISTRY[i].frequency === frequency) {
-      itemSubset.push(ITEM_REGISTRY[i]);
-    }
-  }
-  return itemSubset;
-};
