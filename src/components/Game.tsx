@@ -4,7 +4,7 @@ import { Map } from "./Map";
 import { StatusBar } from "./StatusBar";
 import { ActionBar } from "./ActionBar";
 import { InventoryBarWrapper } from "./InventoryBarWrapper";
-import { CellBar } from "./CellBar";
+import { CellBarWrapper } from "./CellBarWrapper";
 import { CraftBar } from "./CraftBar";
 import { SETTINGS } from "../constants/SETTINGS";
 import { ITEM_REGISTRY } from "../constants/ITEM_REGISTRY";
@@ -162,7 +162,7 @@ export const Game: React.FC = () => {
     forceUpdate();
   };
 
-  const handleDragEnd = (result: any) => {
+  const handleDragEndInventory = (result: any) => {
     if (!result.destination) return;
 
     const items = Array.from(characters[0].inventory.slots);
@@ -173,6 +173,23 @@ export const Game: React.FC = () => {
     updatedCharacters[0].inventory.slots = items;
 
     setCharacters(updatedCharacters);
+    forceUpdate();
+  };
+
+  const handleDragEndCell = (result: any) => {
+    if (!result.destination) return;
+
+    const x = characters[0].coords.x;
+    const y = characters[0].coords.y;
+
+    const items = Array.from(tiles[x][y].items);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    let updatedTiles = tiles;
+    tiles[x][y].items = items;
+
+    setTiles(updatedTiles);
     forceUpdate();
   };
 
@@ -216,14 +233,15 @@ export const Game: React.FC = () => {
                 <InventoryBarWrapper
                   characters={characters}
                   onClick={handleClickItemInventory}
-                  onDragEnd={handleDragEnd.bind(this)}
+                  onDragEnd={handleDragEndInventory}
                 />
               </td>
               <td className="window-aux">
-                <CellBar
+                <CellBarWrapper
                   tiles={tiles}
                   characters={characters}
                   onClick={handleClickItemTile}
+                  onDragEnd={handleDragEndCell}
                 />
               </td>
               <td className="window-aux">
