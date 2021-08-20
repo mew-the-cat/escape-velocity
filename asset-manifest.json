@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/escape-velocity/static/css/main.898d037a.chunk.css",
+    "main.css": "/escape-velocity/static/css/main.d1d4b55b.chunk.css",
     "main.js": "/escape-velocity/static/js/main.98827c5a.chunk.js",
     "main.js.map": "/escape-velocity/static/js/main.98827c5a.chunk.js.map",
     "runtime-main.js": "/escape-velocity/static/js/runtime-main.1e3dac0b.js",
@@ -12,14 +12,14 @@
     "static/js/3.2a0700b2.chunk.js.map": "/escape-velocity/static/js/3.2a0700b2.chunk.js.map",
     "index.html": "/escape-velocity/index.html",
     "static/css/2.d45d6843.chunk.css.map": "/escape-velocity/static/css/2.d45d6843.chunk.css.map",
-    "static/css/main.898d037a.chunk.css.map": "/escape-velocity/static/css/main.898d037a.chunk.css.map",
+    "static/css/main.d1d4b55b.chunk.css.map": "/escape-velocity/static/css/main.d1d4b55b.chunk.css.map",
     "static/js/2.6cbf972b.chunk.js.LICENSE.txt": "/escape-velocity/static/js/2.6cbf972b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.1e3dac0b.js",
     "static/css/2.d45d6843.chunk.css",
     "static/js/2.6cbf972b.chunk.js",
-    "static/css/main.898d037a.chunk.css",
+    "static/css/main.d1d4b55b.chunk.css",
     "static/js/main.98827c5a.chunk.js"
   ]
 }
