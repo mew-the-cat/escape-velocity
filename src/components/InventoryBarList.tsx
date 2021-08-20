@@ -15,37 +15,35 @@ export const InventoryBarList: React.FC<InventoryBarListProps> = ({
   onDragEnd,
 }) => {
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId="items-inventory">
-        {(provided) => (
-          <ul {...provided.droppableProps} ref={provided.innerRef}>
-            {characters[0].inventory.slots.map((item, index) => {
-              return (
-                <Draggable
-                  key={index}
-                  draggableId={"item-inventory-" + index}
-                  index={index}
-                >
-                  {(provided) => (
-                    <li
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                    >
-                      <ItemTile
-                        type="submit"
-                        value={item.name}
-                        onClick={() => onClick(index)}
-                      />
-                    </li>
-                  )}
-                </Draggable>
-              );
-            })}
-            {provided.placeholder}
-          </ul>
-        )}
-      </Droppable>
-    </DragDropContext>
+    <Droppable droppableId="items-inventory">
+      {(provided) => (
+        <ul {...provided.droppableProps} ref={provided.innerRef}>
+          {characters[0].inventory.slots.map((item, index) => {
+            return (
+              <Draggable
+                key={index}
+                draggableId={"item-inventory-" + index}
+                index={index}
+              >
+                {(provided) => (
+                  <li
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                  >
+                    <ItemTile
+                      type="submit"
+                      value={item.name}
+                      onClick={() => onClick(index)}
+                    />
+                  </li>
+                )}
+              </Draggable>
+            );
+          })}
+          {provided.placeholder}
+        </ul>
+      )}
+    </Droppable>
   );
 };

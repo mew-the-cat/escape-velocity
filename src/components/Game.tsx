@@ -160,6 +160,95 @@ export const Game: React.FC = () => {
     forceUpdate();
   };
 
+  const handleDragEnd = (result: any) => {
+    console.log(result);
+    if (!result.destination) return;
+
+    let itemsSource = Array(0);
+    let itemsDestination = Array(0);
+
+    const x = characters[0].coords.x;
+    const y = characters[0].coords.y;
+
+    if (
+      result.source.droppableId === "items-inventory" &&
+      result.destination.droppableId === "items-cell"
+    ) {
+      itemsSource = Array.from(characters[0].inventory.slots);
+      itemsDestination = Array.from(tiles[x][y].items);
+
+      const [reorderedItem] = itemsSource.splice(result.source.index, 1);
+      itemsDestination.splice(result.destination.index, 0, reorderedItem);
+
+      const updatedCharacters = characters;
+      const updatedTiles = tiles;
+
+      updatedCharacters[0].inventory.slots = itemsSource;
+      updatedTiles[x][y].items = itemsDestination;
+
+      setCharacters(updatedCharacters);
+      setTiles(updatedTiles);
+    }
+
+    if (
+      result.source.droppableId === "items-cell" &&
+      result.destination.droppableId === "items-inventory"
+    ) {
+      itemsSource = Array.from(tiles[x][y].items);
+      itemsDestination = Array.from(characters[0].inventory.slots);
+
+      const [reorderedItem] = itemsSource.splice(result.source.index, 1);
+      itemsDestination.splice(result.destination.index, 0, reorderedItem);
+
+      const updatedCharacters = characters;
+      const updatedTiles = tiles;
+
+      updatedCharacters[0].inventory.slots = itemsDestination;
+      updatedTiles[x][y].items = itemsSource;
+
+      setCharacters(updatedCharacters);
+      setTiles(updatedTiles);
+    }
+
+    if (
+      result.source.droppableId === "items-inventory" &&
+      result.destination.droppableId === "items-inventory"
+    ) {
+      const items = Array.from(characters[0].inventory.slots);
+
+      const [reorderedItem] = items.splice(result.source.index, 1);
+      items.splice(result.destination.index, 0, reorderedItem);
+
+      const updatedCharacters = characters;
+      const updatedTiles = tiles;
+
+      updatedCharacters[0].inventory.slots = items;
+
+      setCharacters(updatedCharacters);
+      setTiles(updatedTiles);
+    }
+
+    if (
+      result.source.droppableId === "items-cell" &&
+      result.destination.droppableId === "items-cell"
+    ) {
+      const items = Array.from(tiles[x][y].items);
+
+      const [reorderedItem] = items.splice(result.source.index, 1);
+      items.splice(result.destination.index, 0, reorderedItem);
+
+      const updatedCharacters = characters;
+      const updatedTiles = tiles;
+
+      updatedTiles[x][y].items = items;
+
+      setCharacters(updatedCharacters);
+      setTiles(updatedTiles);
+    }
+
+    forceUpdate();
+  };
+
   const handleDragEndInventory = (result: any) => {
     console.log(result);
     if (!result.destination) return;
@@ -186,7 +275,7 @@ export const Game: React.FC = () => {
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
 
-    let updatedTiles = tiles;
+    const updatedTiles = tiles;
     tiles[x][y].items = items;
 
     setTiles(updatedTiles);
@@ -213,8 +302,7 @@ export const Game: React.FC = () => {
           tiles={tiles}
           onClickInventory={handleClickItemInventory}
           onClickCell={handleClickItemTile}
-          onDragEndInventory={handleDragEndInventory}
-          onDragEndCell={handleDragEndCell}
+          onDragEnd={handleDragEnd}
         />
       </div>
 
