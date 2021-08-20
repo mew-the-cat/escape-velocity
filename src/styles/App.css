@@ -51,7 +51,7 @@ tr {
 }
 
 .itembar {
-  width: 30%;
+  width: 35%;
   height: 500px;
 }
 
@@ -61,11 +61,11 @@ tr {
 }
 
 .actionbar {
-  width: 30%;
+  width: 35%;
 }
 
 .alertbar {
-  width: 60%;
+  width: 65%;
 }
 
 .itemlist {

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ItemTile = styled.input`
-  width: 90%;
+  width: 80%;
   height: 40px;
   margin: 3px 3px 3px 3px;
   background-color: rgb(148, 148, 184);
