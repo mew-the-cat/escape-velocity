@@ -80,5 +80,6 @@ tr {
   display: flex;
   min-height: 500px;
   max-height: 500px;
-  background-color: teal;
+  border-radius: 5px;
+  background-color: rgb(217, 250, 237);
 }
