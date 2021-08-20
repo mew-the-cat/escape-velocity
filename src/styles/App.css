@@ -46,26 +46,26 @@ tr {
 }
 
 .map {
-  width: 28%;
+  width: 30%;
   height: 500px;
 }
 
 .itembar {
-  width: 28%;
+  width: 30%;
   height: 500px;
 }
 
 .statusbar {
-  width: 28%;
+  width: 30%;
   height: 100px;
 }
 
 .actionbar {
-  width: 28%;
+  width: 30%;
 }
 
 .alertbar {
-  width: 56%;
+  width: 60%;
 }
 
 .itemlist {
