@@ -3,9 +3,6 @@ import "../styles/App.css";
 import { Map } from "./Map";
 import { StatusBar } from "./StatusBar";
 import { ActionBar } from "./ActionBar";
-import { InventoryBarWrapper } from "./InventoryBarWrapper";
-import { CellBarWrapper } from "./CellBarWrapper";
-import { CraftBar } from "./CraftBar";
 import { SETTINGS } from "../constants/SETTINGS";
 import { ITEM_REGISTRY } from "../constants/ITEM_REGISTRY";
 import { AlertBar } from "./AlertBar";
@@ -15,6 +12,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { generateInitialState } from "../utils/GameUtils";
 import { generateItem } from "../utils/ItemUtils";
+import { ItemBar } from "./ItemBar";
 
 // Custom hook to force rerenders
 const useForceUpdate = () => {
@@ -163,6 +161,7 @@ export const Game: React.FC = () => {
   };
 
   const handleDragEndInventory = (result: any) => {
+    console.log(result);
     if (!result.destination) return;
 
     const items = Array.from(characters[0].inventory.slots);
@@ -177,6 +176,7 @@ export const Game: React.FC = () => {
   };
 
   const handleDragEndCell = (result: any) => {
+    console.log(result);
     if (!result.destination) return;
 
     const x = characters[0].coords.x;
@@ -205,53 +205,31 @@ export const Game: React.FC = () => {
   }, []);
 
   return (
-    <>
-      <div className="window">
-        <table>
-          <tbody>
-            <tr>
-              <td rowSpan={3}>
-                <Map tiles={tiles} onClick={handleClickTile} />
-              </td>
-              <td colSpan={1} className="window-aux">
-                <StatusBar phase={phase} characters={characters} />
-              </td>
-              <td colSpan={2} className="window-aux-alert">
-                <AlertBar
-                  alertText={phase.alertActive}
-                  isVisible={phase.untilAlertDismissed > 0}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td colSpan={3} className="window-aux">
-                <ActionBar onClick={handleClickSearch} />
-              </td>
-            </tr>
-            <tr>
-              <td className="window-aux">
-                <InventoryBarWrapper
-                  characters={characters}
-                  onClick={handleClickItemInventory}
-                  onDragEnd={handleDragEndInventory}
-                />
-              </td>
-              <td className="window-aux">
-                <CellBarWrapper
-                  tiles={tiles}
-                  characters={characters}
-                  onClick={handleClickItemTile}
-                  onDragEnd={handleDragEndCell}
-                />
-              </td>
-              <td className="window-aux">
-                <CraftBar />
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div className="ui">
+      <div className="ui-row1">
+        <Map tiles={tiles} onClick={handleClickTile} />
+        <ItemBar
+          characters={characters}
+          tiles={tiles}
+          onClickInventory={handleClickItemInventory}
+          onClickCell={handleClickItemTile}
+          onDragEndInventory={handleDragEndInventory}
+          onDragEndCell={handleDragEndCell}
+        />
       </div>
-    </>
+
+      <div className="ui-row2">
+        <StatusBar phase={phase} characters={characters} />
+        <ActionBar onClick={handleClickSearch} />
+      </div>
+
+      <div className="ui-row3">
+        <AlertBar
+          alertText={phase.alertActive}
+          isVisible={phase.untilAlertDismissed > 0}
+        />
+      </div>
+    </div>
   );
 };
 

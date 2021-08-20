@@ -1,32 +1,5 @@
-.window {
-  width: 66%;
-  margin: 20px;
-  padding: 20px;
-  border: 3px green solid;
-  border-radius: 5px;
-}
-
-.window-aux {
-  width: 200px;
-  padding: 10px 0px 0px 10px;
-  vertical-align: 100%;
-  text-align: left;
-  margin: 20px;
-}
-
-.window-aux-alert {
-  width: 200px;
-  padding: 0px;
-  vertical-align: 100%;
-  text-align: left;
-  margin: 20px;
-  vertical-align: bottom;
-}
-
-.item-panel {
-  width: 200px;
-  max-height: 290px;
-  overflow-y: auto;
+td {
+  border: 0px;
 }
 
 .action {
@@ -37,10 +10,7 @@
   border-radius: 5px;
   border: 2px solid rgb(204, 242, 255);
   color: white;
-}
-
-td {
-  border: 0px;
+  font-size: 14px;
 }
 
 ul,
@@ -49,4 +19,66 @@ li {
   list-style: none;
   margin-left: -1em;
   padding-left: 0;
+}
+
+tr {
+  vertical-align: top;
+  width: 100%;
+}
+
+.ui {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 12px;
+}
+
+.ui-row1 {
+  display: flex;
+}
+
+.ui-row2 {
+  display: flex;
+}
+
+.ui-row3 {
+  display: flex;
+}
+
+.map {
+  width: 28%;
+  height: 500px;
+}
+
+.itembar {
+  width: 28%;
+  height: 500px;
+}
+
+.statusbar {
+  width: 28%;
+  height: 100px;
+}
+
+.actionbar {
+  width: 28%;
+}
+
+.alertbar {
+  width: 56%;
+}
+
+.itemlist {
+  width: 33%;
+  text-align: center;
+  overflow-y: auto;
+  min-height: 500px;
+  max-height: 500px;
+}
+
+.itemlists {
+  display: flex;
+  min-height: 500px;
+  max-height: 500px;
+  background-color: teal;
 }

@@ -6,7 +6,7 @@ interface ActionBarProps {
 
 export const ActionBar: React.FC<ActionBarProps> = ({ onClick }) => {
   return (
-    <div>
+    <span className="actionbar">
       <b>Actions</b>
       <br />
       <input
@@ -15,6 +15,6 @@ export const ActionBar: React.FC<ActionBarProps> = ({ onClick }) => {
         value="Search"
         onClick={onClick}
       />
-    </div>
+    </span>
   );
 };

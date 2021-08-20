@@ -9,9 +9,11 @@ interface AlertBarProps {
 
 export const AlertBar: React.FC<AlertBarProps> = ({ alertText, isVisible }) => {
   return (
-    <Alert key="mainAlert" show={isVisible} variant={alertText.variant}>
-      <Alert.Heading>{alertText.header}</Alert.Heading>
-      {alertText.body}
-    </Alert>
+    <span className="alertbar">
+      <Alert key="mainAlert" show={isVisible} variant={alertText.variant}>
+        <Alert.Heading>{alertText.header}</Alert.Heading>
+        {alertText.body}
+      </Alert>
+    </span>
   );
 };

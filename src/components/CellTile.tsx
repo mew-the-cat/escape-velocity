@@ -9,8 +9,9 @@ interface CellTileProps {
 }
 
 export const CellTile = styled.button<CellTileProps>`
-  width: 50px;
-  height: 50px;
+  width: 9%;
+  height: 9%;
+
   font-size: ${(props) => (props.characters.length === 0 ? "8px" : "8px")};
   background: ${(props) =>
     props.characters.length === 0

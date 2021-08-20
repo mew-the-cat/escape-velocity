@@ -10,7 +10,7 @@ interface StatusBarProps {
 
 export const StatusBar: React.FC<StatusBarProps> = ({ phase, characters }) => {
   return (
-    <div>
+    <span className="statusbar">
       <b>Status bar</b>
       <br />
       Turn: {phase.turn} (00:00:0{phase.untilNextTurn})
@@ -22,6 +22,6 @@ export const StatusBar: React.FC<StatusBarProps> = ({ phase, characters }) => {
       <br />
       <br />
       <br />
-    </div>
+    </span>
   );
 };

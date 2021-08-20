@@ -3,8 +3,8 @@ import { ALERT_VARIANT } from "./ALERT_VARIANTS";
 
 export const ALERT_TEXTS = {
   START: new AlertText(
-    "Your starship was heavily...",
-    "damaged during an orbital fight. Pilots managed to perform an emergency landing on the planet below. The vessel is irreversibly damaged. Fellow crew is dead. Endless jungle covering the entire surface...",
+    "Your starship was heavily damaged during an orbital fight...",
+    "Pilots managed to perform an emergency landing on the planet below. The vessel is irreversibly damaged. Fellow crew is dead. Endless jungle covering the entire surface.",
     ALERT_VARIANT.PRIMARY
   ),
   OUT_OF_AP: new AlertText(

@@ -48,6 +48,7 @@ export const CellBarList: React.FC<CellBarListProps> = ({
                 </Draggable>
               );
             })}
+            {provided.placeholder}
           </ul>
         )}
       </Droppable>

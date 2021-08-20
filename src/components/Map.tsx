@@ -28,5 +28,5 @@ export const Map: React.FC<MapProps> = ({ tiles, onClick }) => {
     }
     Cells.push(<br key={"LineBreak" + row} />);
   }
-  return <>{Cells}</>;
+  return <span className="map">{Cells}</span>;
 };
