@@ -13,7 +13,7 @@ export const generateItem = (): Item => {
       randomNumber > SETTINGS.ITEM_SEARCH_FREQUENCY_THRESHOLDS[frequency] &&
       randomNumber < SETTINGS.ITEM_SEARCH_FREQUENCY_THRESHOLDS[frequency + 1]
     ) {
-      const itemSubset = generateItemSubset(frequency);
+      const itemSubset = generateItemsByRarity(frequency);
       const randomIndex = Math.floor(Math.random() * itemSubset.length);
       const randomItem = itemSubset[randomIndex];
       //console.log(randomNumber + "    " + frequency + "    " + randomItem);
@@ -23,7 +23,7 @@ export const generateItem = (): Item => {
   return ITEM_REGISTRY[0];
 };
 
-const generateItemSubset = (frequency: number): Item[] => {
+const generateItemsByRarity = (frequency: number): Item[] => {
   let itemSubset = [];
   for (let i = 0; i < ITEM_REGISTRY.length; i++) {
     if (ITEM_REGISTRY[i].frequency === frequency) {
