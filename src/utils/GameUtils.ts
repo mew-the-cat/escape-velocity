@@ -1,6 +1,8 @@
+import { CONSTRUCTION_REGISTRY } from "../constants/CONSTRUCTION_REGISTRY";
 import { SETTINGS } from "../constants/SETTINGS";
 import { TILETYPE_REGISTRY } from "../constants/TILETYPE_REGISTRY";
 import { Cell } from "../models/Cell";
+import { Constructution } from "../models/Construction";
 import { Phase } from "../models/Phase";
 import { Player } from "../models/Player";
 
@@ -8,6 +10,7 @@ interface GameState {
   characters: Player[];
   phase: Phase;
   tiles: Cell[][];
+  constructions: Constructution[];
 }
 
 export const generateInitialState = (): GameState => {
@@ -31,10 +34,12 @@ export const generateInitialState = (): GameState => {
 
   initialTiles[5][5].characters.push(
     new Player(
+      1,
       SETTINGS.PLAYER_HP_MAX,
       SETTINGS.PLAYER_AP_MAX,
       SETTINGS.POSITION_START.x,
-      SETTINGS.POSITION_START.y
+      SETTINGS.POSITION_START.y,
+      6
     )
   );
 
@@ -43,10 +48,12 @@ export const generateInitialState = (): GameState => {
   const initialCharacters = [];
   initialCharacters.push(
     new Player(
+      1,
       SETTINGS.PLAYER_HP_MAX,
       SETTINGS.PLAYER_AP_MAX,
       SETTINGS.POSITION_START.x,
-      SETTINGS.POSITION_START.y
+      SETTINGS.POSITION_START.y,
+      6
     )
   );
 
@@ -54,9 +61,15 @@ export const generateInitialState = (): GameState => {
 
   const initialPhase = new Phase();
 
+  // Initial constructions
+
+  const initialConstructios = new Array();
+  initialConstructios.push(CONSTRUCTION_REGISTRY[0]);
+
   return {
     characters: initialCharacters,
     phase: initialPhase,
     tiles: initialTiles,
+    constructions: initialConstructios,
   };
 };

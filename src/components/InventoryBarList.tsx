@@ -1,7 +1,7 @@
 import React from "react";
 import { Player } from "../models/Player";
 import { ItemTile } from "./ItemTile";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 
 interface InventoryBarListProps {
   characters: Player[];
@@ -18,7 +18,7 @@ export const InventoryBarList: React.FC<InventoryBarListProps> = ({
     <Droppable droppableId="items-inventory">
       {(provided) => (
         <ul {...provided.droppableProps} ref={provided.innerRef}>
-          {characters[0].inventory.slots.map((item, index) => {
+          {characters[0].items.map((item, index) => {
             return (
               <Draggable
                 key={index}

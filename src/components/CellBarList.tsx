@@ -2,7 +2,7 @@ import React from "react";
 import { Cell } from "../models/Cell";
 import { Player } from "../models/Player";
 import { ItemTile } from "./ItemTile";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 
 interface CellBarListProps {
   characters: Player[];
@@ -15,7 +15,6 @@ export const CellBarList: React.FC<CellBarListProps> = ({
   characters,
   tiles,
   onClick,
-  onDragEnd,
 }) => {
   const x = characters[0].coords.x;
   const y = characters[0].coords.y;
