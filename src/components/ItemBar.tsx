@@ -3,12 +3,14 @@ import { Cell } from "../models/Cell";
 import { Player } from "../models/Player";
 import { InventoryBarWrapper } from "./InventoryBarWrapper";
 import { CellBarWrapper } from "./CellBarWrapper";
-import { CraftBar } from "./CraftBar";
 import { DragDropContext } from "react-beautiful-dnd";
+import { CraftBarWrapper } from "./CraftBarWrapper";
+import { Constructution } from "../models/Construction";
 
 interface ItemBarProps {
   characters: Player[];
   tiles: Cell[][];
+  construction: Constructution;
   onClickInventory: (slot: number) => void;
   onClickCell: (slot: number) => void;
   onDragEnd: (result: any) => void;
@@ -17,6 +19,7 @@ interface ItemBarProps {
 export const ItemBar: React.FC<ItemBarProps> = ({
   characters,
   tiles,
+  construction,
   onClickInventory,
   onClickCell,
   onDragEnd,
@@ -44,7 +47,11 @@ export const ItemBar: React.FC<ItemBarProps> = ({
             </td>
 
             <td className="itemlist">
-              <CraftBar />
+              <CraftBarWrapper
+                construction={construction}
+                onClick={onClickCell}
+                onDragEnd={onDragEnd}
+              />
             </td>
           </tr>
         </tbody>

@@ -1,27 +1,27 @@
 import React from "react";
-import { Player } from "../models/Player";
 import { ItemTile } from "./ItemTile";
 import { Droppable, Draggable } from "react-beautiful-dnd";
+import { Constructution } from "../models/Construction";
 
-interface InventoryBarListProps {
-  characters: Player[];
+interface CraftBarListProps {
+  construction: Constructution;
   onClick: (slot: number) => void;
   onDragEnd: (result: any) => void;
 }
 
-export const InventoryBarList: React.FC<InventoryBarListProps> = ({
-  characters,
+export const CraftBarList: React.FC<CraftBarListProps> = ({
+  construction,
   onClick,
 }) => {
   return (
-    <Droppable droppableId="items-inventory">
+    <Droppable droppableId="items-craft">
       {(provided) => (
         <ul {...provided.droppableProps} ref={provided.innerRef}>
-          {characters[0].items.map((item, index) => {
+          {construction.items.map((item, index) => {
             return (
               <Draggable
                 key={index}
-                draggableId={"item-inventory-" + index}
+                draggableId={"item-craft-" + index}
                 index={index}
               >
                 {(provided) => (

@@ -163,90 +163,127 @@ export const Game: React.FC = () => {
   };
 
   const handleDragEnd = (result: any) => {
-    console.log(result);
     if (!result.destination) return;
-
-    let itemsSource = Array(0);
-    let itemsDestination = Array(0);
 
     const x = characters[0].coords.x;
     const y = characters[0].coords.y;
 
-    if (
-      result.source.droppableId === "items-inventory" &&
-      result.destination.droppableId === "items-cell"
-    ) {
-      itemsSource = Array.from(characters[0].items);
-      itemsDestination = Array.from(tiles[x][y].items);
+    const updatedCharacters = characters;
+    const updatedTiles = tiles;
+    const updatedConstruction = constructions;
 
-      const [reorderedItem] = itemsSource.splice(result.source.index, 1);
-      itemsDestination.splice(result.destination.index, 0, reorderedItem);
+    if (result.source.droppableId === result.destination.droppableId) {
+      if (result.source.droppableId === "items-inventory") {
+        console.log("Inventory");
+        const items = Array.from(characters[0].items);
 
-      const updatedCharacters = characters;
-      const updatedTiles = tiles;
+        const [reorderedItem] = items.splice(result.source.index, 1);
+        items.splice(result.destination.index, 0, reorderedItem);
 
-      updatedCharacters[0].items = itemsSource;
-      updatedTiles[x][y].items = itemsDestination;
+        updatedCharacters[0].items = items;
+      }
 
-      setCharacters(updatedCharacters);
-      setTiles(updatedTiles);
+      if (result.source.droppableId === "items-cell") {
+        console.log("Cell");
+        const items = Array.from(tiles[x][y].items);
+
+        const [reorderedItem] = items.splice(result.source.index, 1);
+        items.splice(result.destination.index, 0, reorderedItem);
+
+        updatedTiles[x][y].items = items;
+      }
+
+      if (result.source.droppableId === "items-craft") {
+        console.log("Craft");
+      }
     }
 
-    if (
-      result.source.droppableId === "items-cell" &&
-      result.destination.droppableId === "items-inventory"
-    ) {
-      itemsSource = Array.from(tiles[x][y].items);
-      itemsDestination = Array.from(characters[0].items);
+    if (result.source.droppableId !== result.destination.droppableId) {
+      let itemsSource = Array(0);
+      let itemsDestination = Array(0);
 
-      const [reorderedItem] = itemsSource.splice(result.source.index, 1);
-      itemsDestination.splice(result.destination.index, 0, reorderedItem);
+      if (
+        result.source.droppableId === "items-inventory" &&
+        result.destination.droppableId === "items-cell"
+      ) {
+        itemsSource = Array.from(characters[0].items);
+        itemsDestination = Array.from(tiles[x][y].items);
 
-      const updatedCharacters = characters;
-      const updatedTiles = tiles;
+        const [reorderedItem] = itemsSource.splice(result.source.index, 1);
+        itemsDestination.splice(result.destination.index, 0, reorderedItem);
 
-      updatedCharacters[0].items = itemsDestination;
-      updatedTiles[x][y].items = itemsSource;
+        updatedCharacters[0].items = itemsSource;
+        updatedTiles[x][y].items = itemsDestination;
+      } else if (
+        result.source.droppableId === "items-cell" &&
+        result.destination.droppableId === "items-inventory"
+      ) {
+        itemsSource = Array.from(tiles[x][y].items);
+        itemsDestination = Array.from(characters[0].items);
 
-      setCharacters(updatedCharacters);
-      setTiles(updatedTiles);
+        const [reorderedItem] = itemsSource.splice(result.source.index, 1);
+        itemsDestination.splice(result.destination.index, 0, reorderedItem);
+
+        updatedTiles[x][y].items = itemsSource;
+        updatedCharacters[0].items = itemsDestination;
+      }
+
+      if (
+        result.source.droppableId === "items-inventory" &&
+        result.destination.droppableId === "items-craft"
+      ) {
+        itemsSource = Array.from(characters[0].items);
+        itemsDestination = Array.from(constructions[0].items);
+
+        const [reorderedItem] = itemsSource.splice(result.source.index, 1);
+        itemsDestination.splice(result.destination.index, 0, reorderedItem);
+
+        updatedCharacters[0].items = itemsSource;
+        updatedConstruction[0].items = itemsDestination;
+      } else if (
+        result.source.droppableId === "items-craft" &&
+        result.destination.droppableId === "items-inventory"
+      ) {
+        itemsSource = Array.from(constructions[0].items);
+        itemsDestination = Array.from(characters[0].items);
+
+        const [reorderedItem] = itemsSource.splice(result.source.index, 1);
+        itemsDestination.splice(result.destination.index, 0, reorderedItem);
+
+        updatedConstruction[0].items = itemsSource;
+        updatedCharacters[0].items = itemsDestination;
+      }
+
+      if (
+        result.source.droppableId === "items-cell" &&
+        result.destination.droppableId === "items-craft"
+      ) {
+        itemsSource = Array.from(tiles[x][y].items);
+        itemsDestination = Array.from(constructions[0].items);
+
+        const [reorderedItem] = itemsSource.splice(result.source.index, 1);
+        itemsDestination.splice(result.destination.index, 0, reorderedItem);
+
+        updatedTiles[x][y].items = itemsSource;
+        updatedConstruction[0].items = itemsDestination;
+      } else if (
+        result.source.droppableId === "items-construction" &&
+        result.destination.droppableId === "itemscraft"
+      ) {
+        itemsSource = Array.from(constructions[0].items);
+        itemsDestination = Array.from(tiles[x][y].items);
+
+        const [reorderedItem] = itemsSource.splice(result.source.index, 1);
+        itemsDestination.splice(result.destination.index, 0, reorderedItem);
+
+        updatedConstruction[0].items = itemsSource;
+        updatedTiles[x][y].items = itemsDestination;
+      }
     }
 
-    if (
-      result.source.droppableId === "items-inventory" &&
-      result.destination.droppableId === "items-inventory"
-    ) {
-      const items = Array.from(characters[0].items);
-
-      const [reorderedItem] = items.splice(result.source.index, 1);
-      items.splice(result.destination.index, 0, reorderedItem);
-
-      const updatedCharacters = characters;
-      const updatedTiles = tiles;
-
-      updatedCharacters[0].items = items;
-
-      setCharacters(updatedCharacters);
-      setTiles(updatedTiles);
-    }
-
-    if (
-      result.source.droppableId === "items-cell" &&
-      result.destination.droppableId === "items-cell"
-    ) {
-      const items = Array.from(tiles[x][y].items);
-
-      const [reorderedItem] = items.splice(result.source.index, 1);
-      items.splice(result.destination.index, 0, reorderedItem);
-
-      const updatedCharacters = characters;
-      const updatedTiles = tiles;
-
-      updatedTiles[x][y].items = items;
-
-      setCharacters(updatedCharacters);
-      setTiles(updatedTiles);
-    }
+    setCharacters(updatedCharacters);
+    setTiles(updatedTiles);
+    setConstructions(updatedConstruction);
 
     forceUpdate();
   };
@@ -269,6 +306,7 @@ export const Game: React.FC = () => {
         <ItemBar
           characters={characters}
           tiles={tiles}
+          construction={constructions[0]}
           onClickInventory={handleClickItemInventory}
           onClickCell={handleClickItemTile}
           onDragEnd={handleDragEnd}

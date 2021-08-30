@@ -63,8 +63,9 @@ export const generateInitialState = (): GameState => {
 
   // Initial constructions
 
-  const initialConstructios = new Array();
-  initialConstructios.push(CONSTRUCTION_REGISTRY[0]);
+  const initialConstructios = [];
+  const engineeringBay = CONSTRUCTION_REGISTRY[0];
+  initialConstructios.push(engineeringBay);
 
   return {
     characters: initialCharacters,
