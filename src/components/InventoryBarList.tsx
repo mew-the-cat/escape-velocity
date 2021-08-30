@@ -14,7 +14,10 @@ export const InventoryBarList: React.FC<InventoryBarListProps> = ({
   onClick,
 }) => {
   return (
-    <Droppable droppableId="items-inventory">
+    <Droppable
+      droppableId="items-inventory"
+      isDropDisabled={characters[0].items.length >= characters[0].itemsMax}
+    >
       {(provided) => (
         <ul {...provided.droppableProps} ref={provided.innerRef}>
           {characters[0].items.map((item, index) => {

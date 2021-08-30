@@ -28,12 +28,6 @@ export class Player {
       y: y,
     };
     this.itemsMax = itemsMax;
-
-    const emptyItems = new Array(6);
-    for (let i = 0; i < itemsMax; i++) {
-      emptyItems[i] = ITEM_REGISTRY[0];
-    }
-
-    this.items = emptyItems;
+    this.items = [] as Item[];
   }
 }

@@ -15,7 +15,9 @@ export const InventoryBarWrapper: React.FC<InventoryBarWrapperProps> = ({
 }) => {
   return (
     <div>
-      <b>Inventory</b>
+      <b>
+        Inventory ({characters[0].items.length}/{characters[0].itemsMax})
+      </b>
       <br />
 
       <InventoryBarList

@@ -82,24 +82,16 @@ export const Game: React.FC = () => {
 
   const handleClickSearch = () => {
     if (characters[0].ap > 0) {
-      let updatedCharacters = characters;
+      const updatedCharacters = characters;
+      const updatedTiles = tiles;
+
       updatedCharacters[0].ap -= 1;
 
-      let fillPosition = -1;
-      for (let i = 0; i < characters[0].itemsMax; i++) {
-        if (characters[0].items[i] === ITEM_REGISTRY[0]) {
-          fillPosition = i;
-          break;
-        }
-      }
-
       const randomIndex = Math.floor(Math.random() * ITEM_REGISTRY.length);
-      if (fillPosition !== -1) {
-        updatedCharacters[0].items[fillPosition] = generateItem();
-
+      if (characters[0].items.length <= characters[0].itemsMax - 1) {
+        updatedCharacters[0].items.push(generateItem());
         setCharacters(updatedCharacters);
       } else {
-        let updatedTiles = tiles;
         const x = characters[0].coords.x;
         const y = characters[0].coords.y;
         updatedTiles[x][y].items.push(ITEM_REGISTRY[randomIndex]);
@@ -114,44 +106,37 @@ export const Game: React.FC = () => {
   };
 
   const handleClickItemInventory = (slot: number) => {
-    if (characters[0].items[slot].id !== ITEM_REGISTRY[0].id) {
-      const x = characters[0].coords.x;
-      const y = characters[0].coords.y;
+    const x = characters[0].coords.x;
+    const y = characters[0].coords.y;
 
-      let updatedCharacters = characters;
-      let updatedTiles = tiles;
+    const updatedCharacters = characters;
+    const updatedTiles = tiles;
 
-      updatedTiles[x][y].items.push(characters[0].items[slot]);
-      updatedCharacters[0].items[slot] = ITEM_REGISTRY[0];
+    updatedTiles[x][y].items.push(characters[0].items[slot]);
+    updatedCharacters[0].items.splice(slot, 1);
 
-      setCharacters(updatedCharacters);
-      setTiles(updatedTiles);
-    }
+    setCharacters(updatedCharacters);
+    setTiles(updatedTiles);
+
     forceUpdate();
   };
 
   const handleClickItemTile = (slot: number) => {
-    let fillPosition = -1;
-    for (var i = 0; i < characters[0].itemsMax; i++) {
-      if (characters[0].items[i] === ITEM_REGISTRY[0]) {
-        fillPosition = i;
-        break;
-      }
-    }
-    if (fillPosition !== -1) {
+    if (characters[0].items.length <= characters[0].itemsMax - 1) {
       const x = characters[0].coords.x;
       const y = characters[0].coords.y;
 
-      let updatedCharacters = characters;
-      let updatedTiles = tiles;
+      const updatedCharacters = characters;
+      const updatedTiles = tiles;
 
-      updatedCharacters[0].items[fillPosition] = tiles[x][y].items[slot];
+      updatedCharacters[0].items.push(tiles[x][y].items[slot]);
       updatedTiles[x][y].items.splice(slot, 1);
 
       setCharacters(updatedCharacters);
       setTiles(updatedTiles);
+
+      forceUpdate();
     }
-    forceUpdate();
   };
 
   const handleDisplayAlert = (alert: AlertText) => {
@@ -221,14 +206,16 @@ export const Game: React.FC = () => {
         result.source.droppableId === "items-cell" &&
         result.destination.droppableId === "items-inventory"
       ) {
-        itemsSource = Array.from(tiles[x][y].items);
-        itemsDestination = Array.from(characters[0].items);
+        if (characters[0].items.length <= characters[0].itemsMax - 1) {
+          itemsSource = Array.from(tiles[x][y].items);
+          itemsDestination = Array.from(characters[0].items);
 
-        const [reorderedItem] = itemsSource.splice(result.source.index, 1);
-        itemsDestination.splice(result.destination.index, 0, reorderedItem);
+          const [reorderedItem] = itemsSource.splice(result.source.index, 1);
+          itemsDestination.splice(result.destination.index, 0, reorderedItem);
 
-        updatedTiles[x][y].items = itemsSource;
-        updatedCharacters[0].items = itemsDestination;
+          updatedTiles[x][y].items = itemsSource;
+          updatedCharacters[0].items = itemsDestination;
+        }
       }
 
       if (
@@ -247,14 +234,16 @@ export const Game: React.FC = () => {
         result.source.droppableId === "items-craft" &&
         result.destination.droppableId === "items-inventory"
       ) {
-        itemsSource = Array.from(constructions[0].items);
-        itemsDestination = Array.from(characters[0].items);
+        if (characters[0].items.length <= characters[0].itemsMax - 1) {
+          itemsSource = Array.from(constructions[0].items);
+          itemsDestination = Array.from(characters[0].items);
 
-        const [reorderedItem] = itemsSource.splice(result.source.index, 1);
-        itemsDestination.splice(result.destination.index, 0, reorderedItem);
+          const [reorderedItem] = itemsSource.splice(result.source.index, 1);
+          itemsDestination.splice(result.destination.index, 0, reorderedItem);
 
-        updatedConstruction[0].items = itemsSource;
-        updatedCharacters[0].items = itemsDestination;
+          updatedConstruction[0].items = itemsSource;
+          updatedCharacters[0].items = itemsDestination;
+        }
       }
 
       if (
@@ -270,8 +259,8 @@ export const Game: React.FC = () => {
         updatedTiles[x][y].items = itemsSource;
         updatedConstruction[0].items = itemsDestination;
       } else if (
-        result.source.droppableId === "items-construction" &&
-        result.destination.droppableId === "itemscraft"
+        result.source.droppableId === "items-craft" &&
+        result.destination.droppableId === "items-cell"
       ) {
         itemsSource = Array.from(constructions[0].items);
         itemsDestination = Array.from(tiles[x][y].items);
