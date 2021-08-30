@@ -174,7 +174,6 @@ export const Game: React.FC = () => {
 
     if (result.source.droppableId === result.destination.droppableId) {
       if (result.source.droppableId === "items-inventory") {
-        console.log("Inventory");
         const items = Array.from(characters[0].items);
 
         const [reorderedItem] = items.splice(result.source.index, 1);
@@ -184,7 +183,6 @@ export const Game: React.FC = () => {
       }
 
       if (result.source.droppableId === "items-cell") {
-        console.log("Cell");
         const items = Array.from(tiles[x][y].items);
 
         const [reorderedItem] = items.splice(result.source.index, 1);
@@ -194,7 +192,12 @@ export const Game: React.FC = () => {
       }
 
       if (result.source.droppableId === "items-craft") {
-        console.log("Craft");
+        const items = Array.from(constructions[0].items);
+
+        const [reorderedItem] = items.splice(result.source.index, 1);
+        items.splice(result.destination.index, 0, reorderedItem);
+
+        updatedConstruction[0].items = items;
       }
     }
 
