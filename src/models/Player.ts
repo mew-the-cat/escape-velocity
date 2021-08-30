@@ -1,4 +1,3 @@
-import { ITEM_REGISTRY } from "../constants/ITEM_REGISTRY";
 import { Item } from "./Item";
 
 export class Player {
