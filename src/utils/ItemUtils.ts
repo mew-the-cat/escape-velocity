@@ -1,4 +1,4 @@
-import { ItemRarity } from "../components/types/ItemRarity";
+import { ItemRarity } from "../types/ItemRarity";
 import { ITEM_REGISTRY } from "../constants/ITEM_REGISTRY";
 import { Item } from "../models/Item";
 

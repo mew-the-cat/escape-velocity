@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Colors } from "../styles/Colors";
-import { ItemRarity } from "./types/ItemRarity";
+import { ItemRarity } from "../types/ItemRarity";
 
 interface ItemTileProps {
   type: string;
