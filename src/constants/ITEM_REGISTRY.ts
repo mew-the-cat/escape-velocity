@@ -1,5 +1,5 @@
 import { Item } from "../models/Item";
-import { ItemRarity } from "../components/types/ItemRarity";
+import { ItemRarity } from "../types/ItemRarity";
 
 export const ITEM_REGISTRY = [
   new Item(0, "Log", ItemRarity.UBIQUITOUS),

@@ -21,7 +21,6 @@ const getRarityGroupItems = (rarity: ItemRarity): Item[] => {
 
 const randomizeRarityGroup = (): ItemRarity => {
   const randomNumber = Math.random() * 100;
-  console.log(randomNumber);
   if (randomNumber <= 35) {
     return ItemRarity.UBIQUITOUS;
   } else if (randomNumber > 35 && randomNumber <= 65) {
