@@ -36,6 +36,7 @@ export const InventoryBarList: React.FC<InventoryBarListProps> = ({
                     <ItemTile
                       type="submit"
                       value={item.name}
+                      rarity={item.rarity}
                       onClick={() => onClick(index)}
                     />
                   </li>

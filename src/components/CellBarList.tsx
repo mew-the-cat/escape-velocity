@@ -39,6 +39,7 @@ export const CellBarList: React.FC<CellBarListProps> = ({
                     <ItemTile
                       type="submit"
                       value={tiles[x][y].items[index].name}
+                      rarity={tiles[x][y].items[index].rarity}
                       onClick={() => onClick(index)}
                     />
                   </li>

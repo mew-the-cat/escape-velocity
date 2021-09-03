@@ -33,6 +33,7 @@ export const CraftBarList: React.FC<CraftBarListProps> = ({
                     <ItemTile
                       type="submit"
                       value={item.name}
+                      rarity={item.rarity}
                       onClick={() => onClick(index)}
                     />
                   </li>
