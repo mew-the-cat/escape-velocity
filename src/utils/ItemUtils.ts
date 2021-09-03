@@ -8,20 +8,20 @@ export const generateItem = (): Item => {
   return randomRarityGroupItems[randomIndex];
 };
 
-const getRarityGroupItems = (rarity: ItemRarity | null): Item[] => {
+const getRarityGroupItems = (rarity: ItemRarity): Item[] => {
   let itemSubset = [];
-  if (rarity !== null) {
-    for (let i = 0; i < ITEM_REGISTRY.length; i++) {
-      if (ITEM_REGISTRY[i].rarity === rarity) {
-        itemSubset.push(ITEM_REGISTRY[i]);
-      }
+
+  for (let i = 0; i < ITEM_REGISTRY.length; i++) {
+    if (ITEM_REGISTRY[i].rarity === rarity) {
+      itemSubset.push(ITEM_REGISTRY[i]);
     }
   }
   return itemSubset;
 };
 
-const randomizeRarityGroup = (): ItemRarity | null => {
+const randomizeRarityGroup = (): ItemRarity => {
   const randomNumber = Math.random() * 100;
+  console.log(randomNumber);
   if (randomNumber <= 35) {
     return ItemRarity.UBIQUITOUS;
   } else if (randomNumber > 35 && randomNumber <= 65) {
@@ -30,9 +30,7 @@ const randomizeRarityGroup = (): ItemRarity | null => {
     return ItemRarity.UNCOMMON;
   } else if (randomNumber > 85 && randomNumber <= 95) {
     return ItemRarity.RARE;
-  } else if (randomNumber > 95 && randomNumber <= 100) {
-    return ItemRarity.SCARCE;
   } else {
-    return null;
+    return ItemRarity.SCARCE;
   }
 };
