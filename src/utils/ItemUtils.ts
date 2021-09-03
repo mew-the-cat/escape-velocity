@@ -1,34 +1,38 @@
+import { ItemRarity } from "../components/types/ItemRarity";
 import { ITEM_REGISTRY } from "../constants/ITEM_REGISTRY";
-import { SETTINGS } from "../constants/SETTINGS";
 import { Item } from "../models/Item";
 
 export const generateItem = (): Item => {
-  const randomNumber = 100 * Math.random();
-  for (
-    let frequency = 0;
-    frequency < SETTINGS.ITEM_SEARCH_FREQUENCY_THRESHOLDS.length - 1;
-    frequency++
-  ) {
-    if (
-      randomNumber > SETTINGS.ITEM_SEARCH_FREQUENCY_THRESHOLDS[frequency] &&
-      randomNumber < SETTINGS.ITEM_SEARCH_FREQUENCY_THRESHOLDS[frequency + 1]
-    ) {
-      const itemSubset = generateItemsByRarity(frequency);
-      const randomIndex = Math.floor(Math.random() * itemSubset.length);
-      const randomItem = itemSubset[randomIndex];
-      //console.log(randomNumber + "    " + frequency + "    " + randomItem);
-      return randomItem;
-    }
-  }
-  return ITEM_REGISTRY[0];
+  const randomRarityGroupItems = getRarityGroupItems(randomizeRarityGroup());
+  const randomIndex = Math.floor(Math.random() * randomRarityGroupItems.length);
+  return randomRarityGroupItems[randomIndex];
 };
 
-const generateItemsByRarity = (frequency: number): Item[] => {
+const getRarityGroupItems = (rarity: ItemRarity | null): Item[] => {
   let itemSubset = [];
-  for (let i = 0; i < ITEM_REGISTRY.length; i++) {
-    if (ITEM_REGISTRY[i].frequency === frequency) {
-      itemSubset.push(ITEM_REGISTRY[i]);
+  if (rarity !== null) {
+    for (let i = 0; i < ITEM_REGISTRY.length; i++) {
+      if (ITEM_REGISTRY[i].rarity === rarity) {
+        itemSubset.push(ITEM_REGISTRY[i]);
+      }
     }
   }
   return itemSubset;
+};
+
+const randomizeRarityGroup = (): ItemRarity | null => {
+  const randomNumber = Math.random() * 100;
+  if (randomNumber <= 35) {
+    return ItemRarity.UBIQUITOUS;
+  } else if (randomNumber > 35 && randomNumber <= 65) {
+    return ItemRarity.COMMON;
+  } else if (randomNumber > 65 && randomNumber <= 85) {
+    return ItemRarity.UNCOMMON;
+  } else if (randomNumber > 85 && randomNumber <= 95) {
+    return ItemRarity.RARE;
+  } else if (randomNumber > 95 && randomNumber <= 100) {
+    return ItemRarity.SCARCE;
+  } else {
+    return null;
+  }
 };

@@ -1,11 +1,13 @@
+import { ItemRarity } from "../components/types/ItemRarity";
+
 export class Item {
   id: number;
   name: string;
-  frequency: number;
+  rarity: ItemRarity;
 
-  constructor(id: number, name: string, frequency: number) {
+  constructor(id: number, name: string, rarity: ItemRarity) {
     this.id = id;
     this.name = name;
-    this.frequency = frequency;
+    this.rarity = rarity;
   }
 }
