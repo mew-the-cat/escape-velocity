@@ -1,4 +1,4 @@
-import { ItemRarity } from "../components/types/ItemRarity";
+import { ItemRarity } from "../types/ItemRarity";
 
 export class Item {
   id: number;
