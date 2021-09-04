@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { generateInitialState } from "../utils/GameUtils";
 import { generateItem } from "../utils/ItemUtils";
 import { ItemBar } from "./ItemBar";
+import { CRAFT_COMBINATIONS } from "../constants/CRAFT_COMBINATIONS";
 
 // Custom hook to force rerenders
 const useForceUpdate = () => {
@@ -103,6 +104,30 @@ export const Game: React.FC = () => {
       handleDisplayAlert(ALERT_TEXTS.OUT_OF_AP);
     }
     forceUpdate();
+  };
+
+  const handleClickCraft = () => {
+    CRAFT_COMBINATIONS.forEach((craftCombination) => {
+      if (
+        craftCombination.itemCombination.length ===
+        constructions[0].items.length
+      ) {
+        let itemCheckSuccessful = true;
+        craftCombination.itemCombination.forEach((item) => {
+          if (!constructions[0].items.includes(item)) {
+            itemCheckSuccessful = false;
+          } else {
+          }
+        });
+        if (itemCheckSuccessful) {
+          const updatedConstructions = constructions;
+          updatedConstructions[0].items = [craftCombination.itemResult];
+          setConstructions(updatedConstructions);
+          forceUpdate();
+          return;
+        }
+      }
+    });
   };
 
   const handleClickItemInventory = (slot: number) => {
@@ -307,7 +332,10 @@ export const Game: React.FC = () => {
 
       <div className="ui-row2">
         <StatusBar phase={phase} characters={characters} />
-        <ActionBar onClick={handleClickSearch} />
+        <ActionBar
+          onClickSearch={handleClickSearch}
+          onClickCraft={handleClickCraft}
+        />
       </div>
 
       <div className="ui-row3">
