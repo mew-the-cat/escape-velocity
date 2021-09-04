@@ -107,27 +107,56 @@ export const Game: React.FC = () => {
   };
 
   const handleClickCraft = () => {
+    if (constructions[0].items.length < 2) {
+      handleDisplayAlert(ALERT_TEXTS.CRAFT_NO_ITEMS);
+      return;
+    }
+
+    if (characters[0].ap <= 0) {
+      handleDisplayAlert(ALERT_TEXTS.OUT_OF_AP);
+      return;
+    }
+
+    const updatedCharacters = [...characters];
+    const updatedConstructions = [...constructions];
+
+    updatedCharacters[0].ap -= 1;
+    setCharacters(updatedCharacters);
+    forceUpdate();
+
+    let isCraftSuccessful = false;
+
     CRAFT_COMBINATIONS.forEach((craftCombination) => {
       if (
         craftCombination.itemCombination.length ===
         constructions[0].items.length
       ) {
         let itemCheckSuccessful = true;
+        const itemCheckTemporaryPool = [...updatedConstructions[0].items];
         craftCombination.itemCombination.forEach((item) => {
-          if (!constructions[0].items.includes(item)) {
-            itemCheckSuccessful = false;
+          if (itemCheckTemporaryPool.includes(item)) {
+            itemCheckTemporaryPool.splice(
+              itemCheckTemporaryPool.indexOf(item),
+              1
+            );
           } else {
+            itemCheckSuccessful = false;
           }
         });
+
         if (itemCheckSuccessful) {
-          const updatedConstructions = constructions;
           updatedConstructions[0].items = [craftCombination.itemResult];
           setConstructions(updatedConstructions);
+          isCraftSuccessful = true;
+          handleDisplayAlert(ALERT_TEXTS.CRAFT_SUCCESS);
           forceUpdate();
           return;
         }
       }
     });
+    if (!isCraftSuccessful) {
+      handleDisplayAlert(ALERT_TEXTS.CRAFT_NO_COMBINATION);
+    }
   };
 
   const handleClickItemInventory = (slot: number) => {
