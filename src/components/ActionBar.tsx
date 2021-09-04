@@ -1,20 +1,16 @@
 import React from "react";
+import { ActionTile } from "./ActionTile";
 
 interface ActionBarProps {
-  onClick: React.MouseEventHandler;
+  onClick: () => void;
 }
 
 export const ActionBar: React.FC<ActionBarProps> = ({ onClick }) => {
   return (
-    <span className="actionbar">
+    <div>
       <b>Actions</b>
       <br />
-      <input
-        className="action"
-        type="button"
-        value="Search"
-        onClick={onClick}
-      />
-    </span>
+      <ActionTile type="button" value="Search" onClick={onClick} />
+    </div>
   );
 };
