@@ -15,6 +15,6 @@ export class Phase {
     this.isNight = false;
     this.untilAlertDismissed = 0;
     this.alertActive = ALERT_TEXTS.START;
-    this.untilAlertDismissed = 1200;
+    this.untilAlertDismissed = 600;
   }
 }

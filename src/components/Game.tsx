@@ -15,12 +15,6 @@ import { generateItem } from "../utils/ItemUtils";
 import { ItemBar } from "./ItemBar";
 import { CRAFT_COMBINATIONS } from "../constants/CRAFT_COMBINATIONS";
 
-// Custom hook to force rerenders
-const useForceUpdate = () => {
-  const [value, setValue] = useState(0); // Integer state
-  return () => setValue((value) => value + 1); // Update the state to force render
-};
-
 export const Game: React.FC = () => {
   const initialState = generateInitialState();
 
@@ -30,8 +24,6 @@ export const Game: React.FC = () => {
   const [constructions, setConstructions] = useState(
     initialState.constructions
   );
-
-  const forceUpdate = useForceUpdate();
 
   const gameLoop = () => {
     const updatedCharacters = [...characters];
@@ -147,7 +139,6 @@ export const Game: React.FC = () => {
           setConstructions(updatedConstructions);
           isCraftSuccessful = true;
           handleDisplayAlert(ALERT_TEXTS.CRAFT_SUCCESS);
-          forceUpdate();
           return;
         }
       }
@@ -184,8 +175,6 @@ export const Game: React.FC = () => {
 
       setCharacters(updatedCharacters);
       setTiles(updatedTiles);
-
-      forceUpdate();
     }
   };
 
@@ -195,7 +184,7 @@ export const Game: React.FC = () => {
     updatedPhase.alertActive = alert;
     updatedPhase.untilAlertDismissed = SETTINGS.DURATION_ALERT;
 
-    setPhase(updatedPhase);
+    setPhase({ ...updatedPhase });
   };
 
   const handleDragEnd = (result: any) => {
@@ -339,6 +328,10 @@ export const Game: React.FC = () => {
   useEffect(() => {
     setTimeout(gameLoop, 1500);
   }, [phase.untilNextTurn]);
+
+  useEffect(() => {
+    console.log("Alert changed!");
+  }, [phase.alertActive]);
 
   return (
     <div className="ui">
