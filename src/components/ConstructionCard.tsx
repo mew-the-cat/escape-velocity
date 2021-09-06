@@ -3,7 +3,6 @@ import { Colors } from "../styles/Colors";
 
 interface ConstructionCardProps {
   amountConstructed: number;
-  defenceTotal: number;
   onClick: () => void;
 }
 
