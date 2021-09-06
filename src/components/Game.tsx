@@ -4,7 +4,7 @@ import { Map } from "./Map";
 import { StatusBar } from "./StatusBar";
 import { ActionBar } from "./ActionBar";
 import { SETTINGS } from "../constants/SETTINGS";
-import { ITEMS } from "../constants/ITEMS";
+
 import { AlertBar } from "./AlertBar";
 import { ALERT_TEXTS } from "../constants/ALERT_TEXTS";
 import { AlertText } from "../models/AlertText";
@@ -14,6 +14,8 @@ import { generateInitialState } from "../utils/GameUtils";
 import { generateItem } from "../utils/ItemUtils";
 import { ItemBar } from "./ItemBar";
 import { CRAFT_COMBINATIONS } from "../constants/CRAFT_COMBINATIONS";
+
+import { ConstructionBar } from "./ConstructionBar";
 
 export const Game: React.FC = () => {
   const initialState = generateInitialState();
@@ -331,34 +333,6 @@ export const Game: React.FC = () => {
     setInterval(gameLoop, 1000);
   }, []);
 
-  /*useEffect(() => {
-    setTimeout(() => {
-      console.log(userPrompt.untilAlertDismissed);
-      const updatedUserPrompt = { ...userPrompt };
-
-      if (updatedUserPrompt.untilAlertDismissed > 0) {
-        updatedUserPrompt.untilAlertDismissed -= 1;
-      }
-
-      setUserPrompt({ ...updatedUserPrompt });
-    }, 1000);
-  }, [userPrompt.untilAlertDismissed]);
-  */
-
-  /*useEffect(() => {
-    setTimeout(() => {
-      const updatedUserPrompt = { ...userPrompt };
-
-      if (updatedUserPrompt.untilAlertDismissed > 1) {
-        updatedUserPrompt.untilAlertDismissed -= 1;
-      }
-
-      setUserPrompt({ ...updatedUserPrompt });
-      console.log(userPrompt.untilAlertDismissed);
-    }, 1000);
-  }, [userPrompt.untilAlertDismissed]);
-*/
-
   return (
     <div className="ui">
       <div className="ui-row1">
@@ -371,6 +345,7 @@ export const Game: React.FC = () => {
           onClickCell={handleClickItemTile}
           onDragEnd={handleDragEnd}
         />
+        <ConstructionBar />
       </div>
 
       <div className="ui-row2">

@@ -5,4 +5,6 @@ export enum Colors {
   ITEM_RARE = "rgb(255, 181, 54)",
   ITEM_SCARCE = "rgb(242, 114, 114)",
   ITEM_UNIQUE = "rgb(227, 0, 91)",
+  CONSTRUCTIONS_BUILT = "rgb(92, 92, 92)",
+  CONSTRUCTIONS_NOT_BUILT = "rgb(188, 188, 188)",
 }

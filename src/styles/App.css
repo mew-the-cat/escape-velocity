@@ -10,11 +10,6 @@ li {
   padding-left: 0;
 }
 
-tr {
-  vertical-align: top;
-  width: 100%;
-}
-
 .ui {
   display: flex;
   flex-wrap: wrap;
@@ -72,4 +67,32 @@ tr {
   border-radius: 5px 5px 5px 5px;
   background-color: rgb(217, 250, 237);
   padding: 10px;
+}
+
+.constructionbar {
+  min-height: 500px;
+  max-height: 500px;
+  border-radius: 5px 5px 5px 5px;
+  background-color: rgb(179, 217, 255);
+  padding: 10px;
+  margin-left: 5px;
+  width: 12%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.constructioncard-table {
+  width: 100%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.constructioncard-row {
+  width: 100%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.constructioncard-cell {
+  width: 50%;
 }
