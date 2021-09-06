@@ -5,12 +5,14 @@ import { Cell } from "../models/Cell";
 import { Constructution } from "../models/Construction";
 import { Phase } from "../models/Phase";
 import { Player } from "../models/Player";
+import { UserPromt } from "../models/UserPrompt";
 
 interface GameState {
   characters: Player[];
   phase: Phase;
   tiles: Cell[][];
   constructions: Constructution[];
+  userPrompt: UserPromt;
 }
 
 export const generateInitialState = (): GameState => {
@@ -67,10 +69,15 @@ export const generateInitialState = (): GameState => {
   const engineeringBay = CONSTRUCTION_REGISTRY[0];
   initialConstructios.push(engineeringBay);
 
+  // Initial user prompt
+
+  const initialUserPrompt = new UserPromt();
+
   return {
     characters: initialCharacters,
     phase: initialPhase,
     tiles: initialTiles,
     constructions: initialConstructios,
+    userPrompt: initialUserPrompt,
   };
 };

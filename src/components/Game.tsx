@@ -24,13 +24,14 @@ export const Game: React.FC = () => {
   const [constructions, setConstructions] = useState(
     initialState.constructions
   );
+  const [userPrompt, setUserPrompt] = useState(initialState.userPrompt);
 
   const gameLoop = () => {
     const updatedCharacters = [...characters];
-    const updatedPhase = { ...phase };
-    console.log(updatedPhase.untilAlertDismissed);
+    const updatedPhase = phase;
+    const updatedUserPrompt = userPrompt;
 
-    if (updatedPhase.untilNextTurn > 1) {
+    if (updatedPhase.untilNextTurn > 0) {
       updatedPhase.untilNextTurn -= 1;
     } else {
       updatedPhase.turn += 1;
@@ -38,12 +39,13 @@ export const Game: React.FC = () => {
       updatedCharacters[0].ap < 4 && (updatedCharacters[0].ap += 1);
     }
 
-    if (updatedPhase.untilAlertDismissed > 0) {
-      updatedPhase.untilAlertDismissed -= 1;
+    if (updatedUserPrompt.untilAlertDismissed > 0) {
+      updatedUserPrompt.untilAlertDismissed -= 1;
     }
 
-    setPhase({ ...updatedPhase });
     setCharacters([...updatedCharacters]);
+    setUserPrompt(updatedUserPrompt);
+    setPhase(updatedPhase);
   };
 
   const handleClickTile = (col: number, row: number) => {
@@ -179,12 +181,12 @@ export const Game: React.FC = () => {
   };
 
   const handleDisplayAlert = (alert: AlertText) => {
-    const updatedPhase = { ...phase };
+    const updatedUserPrompt = userPrompt;
 
-    updatedPhase.alertActive = alert;
-    updatedPhase.untilAlertDismissed = SETTINGS.DURATION_ALERT;
+    updatedUserPrompt.alertActive = alert;
+    updatedUserPrompt.untilAlertDismissed = SETTINGS.DURATION_ALERT;
 
-    setPhase({ ...updatedPhase });
+    setUserPrompt(updatedUserPrompt);
   };
 
   const handleDragEnd = (result: any) => {
@@ -326,12 +328,36 @@ export const Game: React.FC = () => {
   };
 
   useEffect(() => {
-    setTimeout(gameLoop, 1500);
-  }, [phase.untilNextTurn]);
+    setInterval(gameLoop, 1000);
+  }, []);
 
-  useEffect(() => {
-    console.log("Alert changed!");
-  }, [phase.alertActive]);
+  /*useEffect(() => {
+    setTimeout(() => {
+      console.log(userPrompt.untilAlertDismissed);
+      const updatedUserPrompt = { ...userPrompt };
+
+      if (updatedUserPrompt.untilAlertDismissed > 0) {
+        updatedUserPrompt.untilAlertDismissed -= 1;
+      }
+
+      setUserPrompt({ ...updatedUserPrompt });
+    }, 1000);
+  }, [userPrompt.untilAlertDismissed]);
+  */
+
+  /*useEffect(() => {
+    setTimeout(() => {
+      const updatedUserPrompt = { ...userPrompt };
+
+      if (updatedUserPrompt.untilAlertDismissed > 1) {
+        updatedUserPrompt.untilAlertDismissed -= 1;
+      }
+
+      setUserPrompt({ ...updatedUserPrompt });
+      console.log(userPrompt.untilAlertDismissed);
+    }, 1000);
+  }, [userPrompt.untilAlertDismissed]);
+*/
 
   return (
     <div className="ui">
@@ -357,8 +383,8 @@ export const Game: React.FC = () => {
 
       <div className="ui-row3">
         <AlertBar
-          alertText={phase.alertActive}
-          isVisible={phase.untilAlertDismissed > 0}
+          alertText={userPrompt.alertActive}
+          isVisible={userPrompt.untilAlertDismissed > 0}
         />
       </div>
     </div>
