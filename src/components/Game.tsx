@@ -4,7 +4,7 @@ import { Map } from "./Map";
 import { StatusBar } from "./StatusBar";
 import { ActionBar } from "./ActionBar";
 import { SETTINGS } from "../constants/SETTINGS";
-import { ITEM_REGISTRY } from "../constants/ITEM_REGISTRY";
+import { ITEMS } from "../constants/ITEMS";
 import { AlertBar } from "./AlertBar";
 import { ALERT_TEXTS } from "../constants/ALERT_TEXTS";
 import { AlertText } from "../models/AlertText";
@@ -88,14 +88,14 @@ export const Game: React.FC = () => {
 
       updatedCharacters[0].ap -= 1;
 
-      const randomIndex = Math.floor(Math.random() * ITEM_REGISTRY.length);
+      const randomIndex = Math.floor(Math.random() * ITEMS.length);
       if (characters[0].items.length <= characters[0].itemsMax - 1) {
         updatedCharacters[0].items.push(generateItem());
         setCharacters(updatedCharacters);
       } else {
         const x = characters[0].coords.x;
         const y = characters[0].coords.y;
-        updatedTiles[x][y].items.push(ITEM_REGISTRY[randomIndex]);
+        updatedTiles[x][y].items.push(ITEMS[randomIndex]);
 
         setCharacters(updatedCharacters);
         setTiles(updatedTiles);

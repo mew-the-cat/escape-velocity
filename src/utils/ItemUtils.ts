@@ -1,5 +1,5 @@
 import { ItemRarity } from "../types/ItemRarity";
-import { ITEM_REGISTRY } from "../constants/ITEM_REGISTRY";
+import { ITEMS } from "../constants/ITEMS";
 import { Item } from "../models/Item";
 
 export const generateItem = (): Item => {
@@ -11,9 +11,9 @@ export const generateItem = (): Item => {
 const getRarityGroupItems = (rarity: ItemRarity): Item[] => {
   let itemSubset = [];
 
-  for (let i = 0; i < ITEM_REGISTRY.length; i++) {
-    if (ITEM_REGISTRY[i].rarity === rarity) {
-      itemSubset.push(ITEM_REGISTRY[i]);
+  for (let i = 0; i < ITEMS.length; i++) {
+    if (ITEMS[i].rarity === rarity) {
+      itemSubset.push(ITEMS[i]);
     }
   }
   return itemSubset;
