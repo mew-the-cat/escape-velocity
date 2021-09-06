@@ -21,15 +21,17 @@ const getRarityGroupItems = (rarity: ItemRarity): Item[] => {
 
 const randomizeRarityGroup = (): ItemRarity => {
   const randomNumber = Math.random() * 100;
+  let itemRarity: ItemRarity;
   if (randomNumber <= 35) {
-    return ItemRarity.UBIQUITOUS;
+    itemRarity = ItemRarity.UBIQUITOUS;
   } else if (randomNumber > 35 && randomNumber <= 65) {
-    return ItemRarity.COMMON;
+    itemRarity = ItemRarity.COMMON;
   } else if (randomNumber > 65 && randomNumber <= 85) {
-    return ItemRarity.UNCOMMON;
+    itemRarity = ItemRarity.UNCOMMON;
   } else if (randomNumber > 85 && randomNumber <= 95) {
-    return ItemRarity.RARE;
+    itemRarity = ItemRarity.RARE;
   } else {
-    return ItemRarity.SCARCE;
+    itemRarity = ItemRarity.SCARCE;
   }
+  return itemRarity;
 };

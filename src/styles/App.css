@@ -61,8 +61,8 @@ tr {
   width: 33%;
   text-align: center;
   overflow-y: auto;
-  min-height: 500px;
-  max-height: 500px;
+  min-height: 480px;
+  max-height: 480px;
 }
 
 .itemlists {

@@ -7,7 +7,7 @@ export class Phase {
 
   constructor() {
     this.turn = 1;
-    this.untilNextTurn = SETTINGS.DURATION_TURN;
+    this.untilNextTurn = SETTINGS.DURATION_TURN - 1;
     this.isNight = false;
   }
 }

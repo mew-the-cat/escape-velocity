@@ -35,8 +35,9 @@ export const Game: React.FC = () => {
       updatedPhase.untilNextTurn -= 1;
     } else {
       updatedPhase.turn += 1;
-      updatedPhase.untilNextTurn = SETTINGS.DURATION_TURN;
-      updatedCharacters[0].ap < 4 && (updatedCharacters[0].ap += 1);
+      updatedPhase.untilNextTurn = SETTINGS.DURATION_TURN - 1;
+      updatedCharacters[0].ap < SETTINGS.PLAYER_AP_MAX &&
+        (updatedCharacters[0].ap += 1);
     }
 
     if (updatedUserPrompt.untilAlertDismissed > 0) {
@@ -82,14 +83,13 @@ export const Game: React.FC = () => {
 
       updatedCharacters[0].ap -= 1;
 
-      const randomIndex = Math.floor(Math.random() * ITEMS.length);
       if (characters[0].items.length <= characters[0].itemsMax - 1) {
         updatedCharacters[0].items.push(generateItem());
         setCharacters(updatedCharacters);
       } else {
         const x = characters[0].coords.x;
         const y = characters[0].coords.y;
-        updatedTiles[x][y].items.push(ITEMS[randomIndex]);
+        updatedTiles[x][y].items.push(generateItem());
 
         setCharacters(updatedCharacters);
         setTiles(updatedTiles);
