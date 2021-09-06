@@ -9,5 +9,5 @@ export const CRAFT_COMBINATIONS = [
   new CraftCombination([ITEMS[6], ITEMS[6]], ITEMS[7]), // Broken Circuit -> Electronic Plate
   new CraftCombination([ITEMS[7], ITEMS[7]], ITEMS[8]), // Electronic Plate -> Transistor Radio
   new CraftCombination([ITEMS[9], ITEMS[9]], ITEMS[10]), // Copper Ore -> Copper Wire
-  new CraftCombination([ITEMS[10], ITEMS[10]], ITEMS[11]), // Copper Ore -> Copper Wire
+  new CraftCombination([ITEMS[10], ITEMS[10]], ITEMS[11]), // Copper Wire -> Antenna
 ];

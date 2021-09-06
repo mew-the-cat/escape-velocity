@@ -34,10 +34,11 @@ export const Game: React.FC = () => {
   const forceUpdate = useForceUpdate();
 
   const gameLoop = () => {
-    const updatedCharacters = characters;
-    const updatedPhase = phase;
+    const updatedCharacters = [...characters];
+    const updatedPhase = { ...phase };
+    console.log(updatedPhase.untilAlertDismissed);
 
-    if (phase.untilNextTurn > 1) {
+    if (updatedPhase.untilNextTurn > 1) {
       updatedPhase.untilNextTurn -= 1;
     } else {
       updatedPhase.turn += 1;
@@ -49,26 +50,26 @@ export const Game: React.FC = () => {
       updatedPhase.untilAlertDismissed -= 1;
     }
 
-    setCharacters(updatedCharacters);
-    setPhase(updatedPhase);
-    forceUpdate();
+    setPhase({ ...updatedPhase });
+    setCharacters([...updatedCharacters]);
   };
 
   const handleClickTile = (col: number, row: number) => {
     if (characters[0].ap > 0) {
       if (distCellToCharacter(col, row) === 1) {
-        let updatedCharacters = characters;
-        updatedCharacters[0].ap -= 1;
+        const updatedCharacters = [...characters];
+        const updatedTiles = [...tiles];
 
         const oldX = characters[0].coords.x;
         const oldY = characters[0].coords.y;
+
+        updatedCharacters[0].ap -= 1;
 
         updatedCharacters[0].coords = {
           x: col,
           y: row,
         };
 
-        let updatedTiles = tiles;
         updatedTiles[oldX][oldY].characters = [];
         updatedTiles[col][row].characters.push(updatedCharacters[0]);
 
@@ -78,13 +79,12 @@ export const Game: React.FC = () => {
     } else {
       handleDisplayAlert(ALERT_TEXTS.OUT_OF_AP);
     }
-    forceUpdate();
   };
 
   const handleClickSearch = () => {
     if (characters[0].ap > 0) {
-      const updatedCharacters = characters;
-      const updatedTiles = tiles;
+      const updatedCharacters = [...characters];
+      const updatedTiles = [...tiles];
 
       updatedCharacters[0].ap -= 1;
 
@@ -103,7 +103,6 @@ export const Game: React.FC = () => {
     } else {
       handleDisplayAlert(ALERT_TEXTS.OUT_OF_AP);
     }
-    forceUpdate();
   };
 
   const handleClickCraft = () => {
@@ -122,7 +121,6 @@ export const Game: React.FC = () => {
 
     updatedCharacters[0].ap -= 1;
     setCharacters(updatedCharacters);
-    forceUpdate();
 
     let isCraftSuccessful = false;
 
@@ -163,25 +161,23 @@ export const Game: React.FC = () => {
     const x = characters[0].coords.x;
     const y = characters[0].coords.y;
 
-    const updatedCharacters = characters;
-    const updatedTiles = tiles;
+    const updatedCharacters = [...characters];
+    const updatedTiles = [...tiles];
 
     updatedTiles[x][y].items.push(characters[0].items[slot]);
     updatedCharacters[0].items.splice(slot, 1);
 
     setCharacters(updatedCharacters);
     setTiles(updatedTiles);
-
-    forceUpdate();
   };
 
   const handleClickItemTile = (slot: number) => {
     if (characters[0].items.length <= characters[0].itemsMax - 1) {
+      const updatedCharacters = [...characters];
+      const updatedTiles = [...tiles];
+
       const x = characters[0].coords.x;
       const y = characters[0].coords.y;
-
-      const updatedCharacters = characters;
-      const updatedTiles = tiles;
 
       updatedCharacters[0].items.push(tiles[x][y].items[slot]);
       updatedTiles[x][y].items.splice(slot, 1);
@@ -194,22 +190,23 @@ export const Game: React.FC = () => {
   };
 
   const handleDisplayAlert = (alert: AlertText) => {
-    const updatedPhase = phase;
+    const updatedPhase = { ...phase };
+
     updatedPhase.alertActive = alert;
     updatedPhase.untilAlertDismissed = SETTINGS.DURATION_ALERT;
+
     setPhase(updatedPhase);
-    forceUpdate();
   };
 
   const handleDragEnd = (result: any) => {
     if (!result.destination) return;
 
+    const updatedCharacters = [...characters];
+    const updatedTiles = [...tiles];
+    const updatedConstruction = constructions;
+
     const x = characters[0].coords.x;
     const y = characters[0].coords.y;
-
-    const updatedCharacters = characters;
-    const updatedTiles = tiles;
-    const updatedConstruction = constructions;
 
     if (result.source.droppableId === result.destination.droppableId) {
       if (result.source.droppableId === "items-inventory") {
@@ -330,8 +327,6 @@ export const Game: React.FC = () => {
     setCharacters(updatedCharacters);
     setTiles(updatedTiles);
     setConstructions(updatedConstruction);
-
-    forceUpdate();
   };
 
   const distCellToCharacter = (col: number, row: number) => {
@@ -342,8 +337,8 @@ export const Game: React.FC = () => {
   };
 
   useEffect(() => {
-    setInterval(gameLoop, 1000);
-  }, []);
+    setTimeout(gameLoop, 1500);
+  }, [phase.untilNextTurn]);
 
   return (
     <div className="ui">
