@@ -4,7 +4,6 @@ import { Map } from "./Map";
 import { StatusBar } from "./StatusBar";
 import { ActionBar } from "./ActionBar";
 import { SETTINGS } from "../constants/SETTINGS";
-
 import { AlertBar } from "./AlertBar";
 import { ALERT_TEXTS } from "../constants/ALERT_TEXTS";
 import { AlertText } from "../models/AlertText";
@@ -27,6 +26,8 @@ export const Game: React.FC = () => {
     initialState.constructions
   );
   const [userPrompt, setUserPrompt] = useState(initialState.userPrompt);
+
+  const [isInside, setIsInside] = useState(false);
 
   const gameLoop = () => {
     const updatedCharacters = [...characters];
@@ -333,6 +334,12 @@ export const Game: React.FC = () => {
     setInterval(gameLoop, 1000);
   }, []);
 
+  useEffect(() => {
+    let x = characters[0].coords.x;
+    let y = characters[0].coords.y;
+    setIsInside(x === 5 && y === 5);
+  }, [characters[0].coords.x, characters[0].coords.y]);
+
   return (
     <div className="ui">
       <div className="ui-row1">
@@ -344,8 +351,9 @@ export const Game: React.FC = () => {
           onClickInventory={handleClickItemInventory}
           onClickCell={handleClickItemTile}
           onDragEnd={handleDragEnd}
+          isInside={isInside}
         />
-        <ConstructionBar />
+        {isInside && <ConstructionBar />}
       </div>
 
       <div className="ui-row2">

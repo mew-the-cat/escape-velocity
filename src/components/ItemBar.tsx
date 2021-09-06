@@ -16,6 +16,7 @@ interface ItemBarProps {
   onClickInventory: (slot: number) => void;
   onClickCell: (slot: number) => void;
   onDragEnd: (result: any) => void;
+  isInside: boolean;
 }
 
 export const ItemBar: React.FC<ItemBarProps> = ({
@@ -25,15 +26,8 @@ export const ItemBar: React.FC<ItemBarProps> = ({
   onClickInventory,
   onClickCell,
   onDragEnd,
+  isInside,
 }) => {
-  const [isShowCraft, setIsShowCraft] = useState(false);
-
-  useEffect(() => {
-    let x = characters[0].coords.x;
-    let y = characters[0].coords.y;
-    setIsShowCraft(x === 5 && y === 5);
-  }, [characters[0].coords.x, characters[0].coords.y]);
-
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <table className="itembar">
@@ -55,7 +49,7 @@ export const ItemBar: React.FC<ItemBarProps> = ({
                 onDragEnd={onDragEnd}
               />
             </td>
-            {isShowCraft && (
+            {isInside && (
               <td className="itemlist">
                 <CraftBarWrapper
                   construction={construction}
