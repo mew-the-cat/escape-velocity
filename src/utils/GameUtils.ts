@@ -1,6 +1,6 @@
 import { CONSTRUCTIONS } from "../constants/CONSTRUCTIONS";
 import { SETTINGS } from "../constants/SETTINGS";
-import { TILETYPE_REGISTRY } from "../constants/TILETYPE_REGISTRY";
+import { TILETYPES } from "../constants/TILETYPES";
 import { Cell } from "../models/Cell";
 import { Constructution } from "../models/Construction";
 import { Phase } from "../models/Phase";
@@ -20,19 +20,19 @@ export const generateInitialState = (): GameState => {
   for (let col = 0; col < initialTiles.length; col++) {
     initialTiles[col] = new Array(11);
     for (let row = 0; row < initialTiles[col].length; row++) {
-      initialTiles[col][row] = new Cell(TILETYPE_REGISTRY[0], col, row);
+      initialTiles[col][row] = new Cell(TILETYPES[0], col, row);
     }
   }
 
-  initialTiles[5][5].type = TILETYPE_REGISTRY[1];
-  initialTiles[4][4].type = TILETYPE_REGISTRY[2];
-  initialTiles[5][4].type = TILETYPE_REGISTRY[2];
-  initialTiles[6][4].type = TILETYPE_REGISTRY[2];
-  initialTiles[4][5].type = TILETYPE_REGISTRY[2];
-  initialTiles[6][5].type = TILETYPE_REGISTRY[2];
-  initialTiles[4][6].type = TILETYPE_REGISTRY[2];
-  initialTiles[5][6].type = TILETYPE_REGISTRY[2];
-  initialTiles[6][6].type = TILETYPE_REGISTRY[2];
+  initialTiles[5][5].type = TILETYPES[1];
+  initialTiles[4][4].type = TILETYPES[2];
+  initialTiles[5][4].type = TILETYPES[2];
+  initialTiles[6][4].type = TILETYPES[2];
+  initialTiles[4][5].type = TILETYPES[2];
+  initialTiles[6][5].type = TILETYPES[2];
+  initialTiles[4][6].type = TILETYPES[2];
+  initialTiles[5][6].type = TILETYPES[2];
+  initialTiles[6][6].type = TILETYPES[2];
 
   initialTiles[5][5].characters.push(
     new Player(
@@ -67,7 +67,7 @@ export const generateInitialState = (): GameState => {
 
   const initialConstructions = [];
   const engineeringBay = CONSTRUCTIONS[0];
-  const starship = CONSTRUCTIONSY[1];
+  const starship = CONSTRUCTIONS[1];
 
   initialConstructions.push(engineeringBay);
   initialConstructions.push(starship);
