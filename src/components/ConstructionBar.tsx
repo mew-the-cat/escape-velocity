@@ -1,6 +1,4 @@
 import React from "react";
-
-import { ConstructionCard } from "./ConstructionCard";
 import { ConstructionCardWrapper } from "./ConstructionCardWrapper";
 
 export const ConstructionBar: React.FC = () => {
