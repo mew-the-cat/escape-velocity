@@ -5,12 +5,12 @@ import { ConstructionCard } from "./ConstructionCard";
 interface ConstructionCardWrapperProps {
   name: string;
   amountConstructed: number;
-  defenceTotal: number;
+  defenseTotal: number;
   onClick: () => void;
 }
 
 export const ConstructionCardWrapper: React.FC<ConstructionCardWrapperProps> =
-  ({ name, amountConstructed, defenceTotal, onClick }) => {
+  ({ name, amountConstructed, defenseTotal, onClick }) => {
     return (
       <ConstructionCard amountConstructed={amountConstructed} onClick={onClick}>
         <table className="constructioncard-table">
@@ -21,7 +21,7 @@ export const ConstructionCardWrapper: React.FC<ConstructionCardWrapperProps> =
               </td>
             </tr>
             <tr className="constructioncard-row">
-              <td className="constructioncard-cell">{defenceTotal} DEF</td>
+              <td className="constructioncard-cell">{defenseTotal} DEF</td>
               <td className="constructioncard-cell">x{amountConstructed}</td>
             </tr>
           </tbody>

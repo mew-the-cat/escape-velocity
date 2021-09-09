@@ -1,31 +1,33 @@
 import React from "react";
+import { CONSTRUCTIONS } from "../constants/CONSTRUCTIONS";
+import { Constructution } from "../models/Construction";
+import { ItemRarity } from "../types/ItemRarity";
+import { ConstructionCard } from "./ConstructionCard";
 import { ConstructionCardWrapper } from "./ConstructionCardWrapper";
+import { ItemTile } from "./ItemTile";
 
-export const ConstructionBar: React.FC = () => {
+interface ConstructionBarProps {
+  constructions: Constructution[];
+}
+
+export const ConstructionBar: React.FC<ConstructionBarProps> = ({
+  constructions,
+}) => {
   return (
     <span className="constructionbar">
       <b>Constructions</b>
       <br />
-      <ConstructionCardWrapper
-        name="Spacecraft Hull"
-        amountConstructed={1}
-        defenceTotal={80}
-        onClick={() => {}}
-      />
 
-      <ConstructionCardWrapper
-        name="Engineering Bay"
-        amountConstructed={1}
-        defenceTotal={10}
-        onClick={() => {}}
-      />
-
-      <ConstructionCardWrapper
-        name="Emergency Beacon"
-        amountConstructed={0}
-        defenceTotal={0}
-        onClick={() => {}}
-      />
+      {constructions.map((construction, index) => {
+        return (
+          <ConstructionCardWrapper
+            name={construction.name}
+            defenseTotal={construction.defense}
+            amountConstructed={1}
+            onClick={() => {}}
+          />
+        );
+      })}
     </span>
   );
 };

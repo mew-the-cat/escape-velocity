@@ -353,7 +353,7 @@ export const Game: React.FC = () => {
           onDragEnd={handleDragEnd}
           isInside={isInside}
         />
-        {isInside && <ConstructionBar />}
+        {isInside && <ConstructionBar constructions={constructions} />}
       </div>
 
       <div className="ui-row2">
