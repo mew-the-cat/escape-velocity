@@ -1,9 +1,9 @@
 import React from "react";
-import { Constructution } from "../models/Construction";
+import { Construction } from "../models/Construction";
 import { CraftBarList } from "./CraftBarList";
 
 interface CraftBarWrapperProps {
-  construction: Constructution;
+  construction: Construction;
   onClick: (slot: number) => void;
   onDragEnd: (result: any) => void;
 }

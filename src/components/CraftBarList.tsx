@@ -1,10 +1,10 @@
 import React from "react";
 import { ItemTile } from "./ItemTile";
 import { Droppable, Draggable } from "react-beautiful-dnd";
-import { Constructution } from "../models/Construction";
+import { Construction } from "../models/Construction";
 
 interface CraftBarListProps {
-  construction: Constructution;
+  construction: Construction;
   onClick: (slot: number) => void;
   onDragEnd: (result: any) => void;
 }

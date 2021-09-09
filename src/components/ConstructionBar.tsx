@@ -1,13 +1,9 @@
 import React from "react";
-import { CONSTRUCTIONS } from "../constants/CONSTRUCTIONS";
-import { Constructution } from "../models/Construction";
-import { ItemRarity } from "../types/ItemRarity";
-import { ConstructionCard } from "./ConstructionCard";
+import { Construction } from "../models/Construction";
 import { ConstructionCardWrapper } from "./ConstructionCardWrapper";
-import { ItemTile } from "./ItemTile";
 
 interface ConstructionBarProps {
-  constructions: Constructution[];
+  constructions: Construction[];
 }
 
 export const ConstructionBar: React.FC<ConstructionBarProps> = ({
@@ -21,9 +17,10 @@ export const ConstructionBar: React.FC<ConstructionBarProps> = ({
       {constructions.map((construction, index) => {
         return (
           <ConstructionCardWrapper
-            name={construction.name}
-            defenseTotal={construction.defense}
-            amountConstructed={1}
+            name={construction.blueprint.name}
+            defenseTotal={construction.blueprint.defenseBase}
+            itemsToConstruct={construction.blueprint.itemsToConstruct}
+            amount={construction.amount}
             onClick={() => {}}
           />
         );

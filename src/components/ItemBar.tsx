@@ -5,14 +5,12 @@ import { InventoryBarWrapper } from "./InventoryBarWrapper";
 import { CellBarWrapper } from "./CellBarWrapper";
 import { DragDropContext } from "react-beautiful-dnd";
 import { CraftBarWrapper } from "./CraftBarWrapper";
-import { Constructution } from "../models/Construction";
-import { useState } from "react";
-import { useEffect } from "react";
+import { Construction } from "../models/Construction";
 
 interface ItemBarProps {
   characters: Player[];
   tiles: Cell[][];
-  construction: Constructution;
+  construction: Construction;
   onClickInventory: (slot: number) => void;
   onClickCell: (slot: number) => void;
   onDragEnd: (result: any) => void;

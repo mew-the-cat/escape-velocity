@@ -1,29 +1,47 @@
 import React from "react";
-
+import { Item } from "../models/Item";
+import { BlueprintItem } from "./BlueprintItem";
 import { ConstructionCard } from "./ConstructionCard";
 
 interface ConstructionCardWrapperProps {
   name: string;
-  amountConstructed: number;
+  amount: number;
   defenseTotal: number;
+  itemsToConstruct: Item[] | undefined;
   onClick: () => void;
 }
 
 export const ConstructionCardWrapper: React.FC<ConstructionCardWrapperProps> =
-  ({ name, amountConstructed, defenseTotal, onClick }) => {
+  ({ name, amount, defenseTotal, itemsToConstruct, onClick }) => {
     return (
-      <ConstructionCard amountConstructed={amountConstructed} onClick={onClick}>
+      <ConstructionCard amount={amount} onClick={onClick}>
         <table className="constructioncard-table">
           <tbody>
             <tr className="constructioncard-row">
               <td className="constructioncard-cell" colSpan={2}>
-                {name}
+                <b>{name}</b>
               </td>
             </tr>
             <tr className="constructioncard-row">
-              <td className="constructioncard-cell">{defenseTotal} DEF</td>
-              <td className="constructioncard-cell">x{amountConstructed}</td>
+              <td className="constructioncard-cell">
+                <i>{defenseTotal} DEF</i>
+              </td>
+              <td className="constructioncard-cell">
+                <i>x{amount}</i>
+              </td>
             </tr>
+            {itemsToConstruct &&
+              itemsToConstruct.map((item) => {
+                return (
+                  <tr>
+                    <td colSpan={2}>
+                      <BlueprintItem rarity={item.rarity}>
+                        {item.name}
+                      </BlueprintItem>
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
       </ConstructionCard>

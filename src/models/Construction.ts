@@ -1,22 +1,16 @@
+import { Blueprint } from "./Blueprint";
 import { Item } from "./Item";
 
-export class Constructution {
+export class Construction {
   id: number;
-  name: string;
-  defense: number;
-  itemsToConstruct?: Item[];
+  blueprint: Blueprint;
+  amount: number;
   items: Item[];
 
-  constructor(
-    id: number,
-    name: string,
-    defense: number,
-    itemsToConstruct?: Item[]
-  ) {
+  constructor(id: number, blueprint: Blueprint, amount: number) {
     this.id = id;
-    this.name = name;
-    this.defense = defense;
-    this.itemsToConstruct = itemsToConstruct;
+    this.blueprint = blueprint;
+    this.amount = amount;
     this.items = [];
   }
 }

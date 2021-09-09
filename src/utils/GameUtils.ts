@@ -1,17 +1,17 @@
-import { CONSTRUCTIONS } from "../constants/CONSTRUCTIONS";
+import { BLUEPRINTS } from "../constants/BLUEPRINTS";
 import { SETTINGS } from "../constants/SETTINGS";
 import { TILETYPES } from "../constants/TILETYPES";
 import { Cell } from "../models/Cell";
-import { Constructution } from "../models/Construction";
 import { Phase } from "../models/Phase";
 import { Player } from "../models/Player";
 import { UserPromt } from "../models/UserPrompt";
+import { Construction } from "../models/Construction";
 
 interface GameState {
   characters: Player[];
   phase: Phase;
   tiles: Cell[][];
-  constructions: Constructution[];
+  constructions: Construction[];
   userPrompt: UserPromt;
 }
 
@@ -66,11 +66,13 @@ export const generateInitialState = (): GameState => {
   // Initial constructions
 
   const initialConstructions = [];
-  const engineeringBay = CONSTRUCTIONS[0];
-  const starship = CONSTRUCTIONS[1];
+  const engineeringBay = new Construction(0, BLUEPRINTS[0], 1);
+  const starship = new Construction(1, BLUEPRINTS[1], 1);
+  const emergencyBeaconUnfinished = new Construction(2, BLUEPRINTS[2], 0);
 
   initialConstructions.push(engineeringBay);
   initialConstructions.push(starship);
+  initialConstructions.push(emergencyBeaconUnfinished);
 
   // Initial user prompt
 
