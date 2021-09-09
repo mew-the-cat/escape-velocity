@@ -1,4 +1,4 @@
-import { CONSTRUCTION_REGISTRY } from "../constants/CONSTRUCTION_REGISTRY";
+import { CONSTRUCTIONS } from "../constants/CONSTRUCTIONS";
 import { SETTINGS } from "../constants/SETTINGS";
 import { TILETYPE_REGISTRY } from "../constants/TILETYPE_REGISTRY";
 import { Cell } from "../models/Cell";
@@ -65,9 +65,12 @@ export const generateInitialState = (): GameState => {
 
   // Initial constructions
 
-  const initialConstructios = [];
-  const engineeringBay = CONSTRUCTION_REGISTRY[0];
-  initialConstructios.push(engineeringBay);
+  const initialConstructions = [];
+  const engineeringBay = CONSTRUCTIONS[0];
+  const starship = CONSTRUCTIONSY[1];
+
+  initialConstructions.push(engineeringBay);
+  initialConstructions.push(starship);
 
   // Initial user prompt
 
@@ -77,7 +80,7 @@ export const generateInitialState = (): GameState => {
     characters: initialCharacters,
     phase: initialPhase,
     tiles: initialTiles,
-    constructions: initialConstructios,
+    constructions: initialConstructions,
     userPrompt: initialUserPrompt,
   };
 };
