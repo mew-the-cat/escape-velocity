@@ -20,6 +20,7 @@ export const ConstructionBar: React.FC<ConstructionBarProps> = ({
       {constructions.map((construction, index) => {
         return (
           <ConstructionCardWrapper
+            key={index}
             name={construction.blueprint.name}
             defenseTotal={construction.blueprint.defenseBase}
             itemsToConstruct={construction.blueprint.itemsToConstruct}

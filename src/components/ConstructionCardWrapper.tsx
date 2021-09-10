@@ -31,9 +31,9 @@ export const ConstructionCardWrapper: React.FC<ConstructionCardWrapperProps> =
               </td>
             </tr>
             {itemsToConstruct &&
-              itemsToConstruct.map((item) => {
+              itemsToConstruct.map((item, index) => {
                 return (
-                  <tr>
+                  <tr key={index}>
                     <td colSpan={2}>
                       <BlueprintItem rarity={item.rarity}>
                         {item.name}

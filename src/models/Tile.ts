@@ -10,6 +10,8 @@ export class Tile {
   };
   characters: Player[];
   items: Item[];
+  timesSearched: number;
+  isDepleted: boolean;
 
   constructor(type: Tiletype, x: number, y: number) {
     this.type = type;
@@ -19,5 +21,7 @@ export class Tile {
     };
     this.characters = [];
     this.items = [];
+    this.timesSearched = 0;
+    this.isDepleted = false;
   }
 }

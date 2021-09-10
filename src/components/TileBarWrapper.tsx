@@ -22,7 +22,8 @@ export const TileBarWrapper: React.FC<TileBarWrapperProps> = ({
   return (
     <div>
       <b>
-        {tiles[x][y].type.name} ({x}, {y})
+        {tiles[x][y].type.name} ({x}, {y}){" "}
+        {tiles[x][y].isDepleted && "[DEPLETED]"}
       </b>
       <br />
 

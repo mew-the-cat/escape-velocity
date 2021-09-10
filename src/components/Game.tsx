@@ -15,6 +15,7 @@ import { ItemBar } from "./ItemBar";
 import { CRAFT_COMBINATIONS } from "../constants/CRAFT_COMBINATIONS";
 import { ConstructionBar } from "./ConstructionBar";
 import { Blueprint } from "../models/Blueprint";
+import { randomizeDepletion } from "../utils/TileUtils";
 
 export const Game: React.FC = () => {
   const initialState = generateInitialState();
@@ -98,14 +99,24 @@ export const Game: React.FC = () => {
     updatedCharacters[0].ap -= 1;
 
     if (characters[0].items.length <= characters[0].itemsMax - 1) {
-      updatedCharacters[0].items.push(generateItem());
-      setCharacters(updatedCharacters);
+      updatedCharacters[0].items.push(
+        generateItem(updatedTiles[x][y].isDepleted)
+      );
     } else {
-      updatedTiles[x][y].items.push(generateItem());
-
-      setCharacters(updatedCharacters);
-      setTiles(updatedTiles);
+      updatedTiles[x][y].items.push(
+        generateItem(updatedTiles[x][y].isDepleted)
+      );
     }
+
+    updatedTiles[x][y].timesSearched += 1;
+    if (!updatedTiles[x][y].isDepleted) {
+      updatedTiles[x][y].isDepleted = randomizeDepletion(
+        updatedTiles[x][y].timesSearched
+      );
+    }
+
+    setCharacters(updatedCharacters);
+    setTiles(updatedTiles);
   };
 
   const handleClickCraft = () => {
