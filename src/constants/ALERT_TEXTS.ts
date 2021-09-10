@@ -44,7 +44,7 @@ export const ALERT_TEXTS = {
   ),
   VICTORY: new AlertText(
     "Emergency Beacon is Online [VICTORY]",
-    "This piece of scrap assembled with glue and duct tape on your knees seems to work! After 4 nervous hours of waiting amid the endleess jungle a rescue spacecraft appears on the horizon. You desperate call hor help wa heard. You got a ticket out of this hell!",
+    "This piece of scrap assembled with glue and duct tape on your knees seems to work! After 4 nervous hours of waiting amid the endleess forest a rescue spacecraft appears on the horizon. You desperate call hor help wa heard. You got a ticket out of this hell!",
     ALERT_VARIANT.VICTORY
   ),
 };
