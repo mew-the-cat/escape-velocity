@@ -79,25 +79,32 @@ export const Game: React.FC = () => {
   };
 
   const handleClickSearch = () => {
-    if (characters[0].ap > 0) {
-      const updatedCharacters = [...characters];
-      const updatedTiles = [...tiles];
+    const x = characters[0].coords.x;
+    const y = characters[0].coords.y;
 
-      updatedCharacters[0].ap -= 1;
+    if (x === 5 && y === 5) {
+      handleDisplayAlert(ALERT_TEXTS.NO_SEARCH_ZONE);
+      return;
+    }
 
-      if (characters[0].items.length <= characters[0].itemsMax - 1) {
-        updatedCharacters[0].items.push(generateItem());
-        setCharacters(updatedCharacters);
-      } else {
-        const x = characters[0].coords.x;
-        const y = characters[0].coords.y;
-        updatedTiles[x][y].items.push(generateItem());
-
-        setCharacters(updatedCharacters);
-        setTiles(updatedTiles);
-      }
-    } else {
+    if (characters[0].ap <= 0) {
       handleDisplayAlert(ALERT_TEXTS.OUT_OF_AP);
+      return;
+    }
+
+    const updatedCharacters = [...characters];
+    const updatedTiles = [...tiles];
+
+    updatedCharacters[0].ap -= 1;
+
+    if (characters[0].items.length <= characters[0].itemsMax - 1) {
+      updatedCharacters[0].items.push(generateItem());
+      setCharacters(updatedCharacters);
+    } else {
+      updatedTiles[x][y].items.push(generateItem());
+
+      setCharacters(updatedCharacters);
+      setTiles(updatedTiles);
     }
   };
 
