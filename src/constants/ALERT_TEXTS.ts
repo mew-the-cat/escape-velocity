@@ -37,4 +37,9 @@ export const ALERT_TEXTS = {
     "You have managed to build a new construction according to the blueprint!",
     ALERT_VARIANT.SUCCESS
   ),
+  VICTORY: new AlertText(
+    "Emergency Beacon is Online",
+    "This piece of scrap assembled with glue and duct tape on your knees seems to work! After 4 nervous hours of waiting amid the endleess jungle a rescue spacecraft appears on the horizon. You desperate call hor help wa heard. You got a ticket out of this hell.",
+    ALERT_VARIANT.VICTORY
+  ),
 };

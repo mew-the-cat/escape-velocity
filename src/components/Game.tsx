@@ -26,7 +26,6 @@ export const Game: React.FC = () => {
     initialState.constructions
   );
   const [userPrompt, setUserPrompt] = useState(initialState.userPrompt);
-
   const [isInside, setIsInside] = useState(false);
 
   const gameLoop = () => {
@@ -385,6 +384,15 @@ export const Game: React.FC = () => {
     let y = characters[0].coords.y;
     setIsInside(x === 5 && y === 5);
   }, [characters[0].coords.x, characters[0].coords.y]);
+
+  useEffect(() => {
+    if (constructions[2].amount > 0) {
+      handleDisplayAlert(ALERT_TEXTS.VICTORY);
+      const updatedUserPrompt = userPrompt;
+      updatedUserPrompt.untilAlertDismissed = 1200;
+      setUserPrompt(updatedUserPrompt);
+    }
+  }, [constructions]);
 
   return (
     <div className="ui">
