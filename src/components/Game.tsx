@@ -425,6 +425,7 @@ export const Game: React.FC = () => {
       <div className="ui-row2">
         <StatusBar phase={phase} characters={characters} />
         <ActionBar
+          isInside={isInside}
           onClickSearch={handleClickSearch}
           onClickCraft={handleClickCraft}
         />
