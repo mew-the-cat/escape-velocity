@@ -13,8 +13,8 @@ import { generateInitialState } from "../utils/GameUtils";
 import { generateItem } from "../utils/ItemUtils";
 import { ItemBar } from "./ItemBar";
 import { CRAFT_COMBINATIONS } from "../constants/CRAFT_COMBINATIONS";
-
 import { ConstructionBar } from "./ConstructionBar";
+import { Blueprint } from "../models/Blueprint";
 
 export const Game: React.FC = () => {
   const initialState = generateInitialState();
@@ -151,6 +151,52 @@ export const Game: React.FC = () => {
     if (!isCraftSuccessful) {
       handleDisplayAlert(ALERT_TEXTS.CRAFT_NO_COMBINATION);
     }
+  };
+
+  const handleClickConstruct = (blueprint: Blueprint) => {
+    if (characters[0].ap <= 0) {
+      handleDisplayAlert(ALERT_TEXTS.OUT_OF_AP);
+      return;
+    }
+
+    const updatedCharacters = [...characters];
+    updatedCharacters[0].ap -= 1;
+
+    let areAllItemsPresent = true;
+    const itemCheckTemporaryPool = [...tiles[5][5].items];
+
+    blueprint.itemsToConstruct?.map((itemToConstruct) => {
+      if (itemCheckTemporaryPool.includes(itemToConstruct)) {
+        itemCheckTemporaryPool.splice(
+          itemCheckTemporaryPool.indexOf(itemToConstruct),
+          1
+        );
+      } else {
+        areAllItemsPresent = false;
+        handleDisplayAlert(ALERT_TEXTS.CONSTRUCTION_NO_ITEMS);
+      }
+    });
+
+    if (areAllItemsPresent) {
+      const updatedConstructions = [...constructions];
+      const updatedTiles = [...tiles];
+
+      blueprint.itemsToConstruct?.map((itemToConstruct) => {
+        if (updatedTiles[5][5].items.includes(itemToConstruct)) {
+          updatedTiles[5][5].items.splice(
+            updatedTiles[5][5].items.indexOf(itemToConstruct),
+            1
+          );
+        }
+      });
+
+      updatedConstructions[blueprint.id].amount += 1;
+
+      setConstructions(updatedConstructions);
+      setTiles(updatedTiles);
+      handleDisplayAlert(ALERT_TEXTS.CONSTRUCTION_SUCCESS);
+    }
+    setCharacters(characters);
   };
 
   const handleClickItemInventory = (slot: number) => {
@@ -353,7 +399,12 @@ export const Game: React.FC = () => {
           onDragEnd={handleDragEnd}
           isInside={isInside}
         />
-        {isInside && <ConstructionBar constructions={constructions} />}
+        {isInside && (
+          <ConstructionBar
+            constructions={constructions}
+            onClick={handleClickConstruct}
+          />
+        )}
       </div>
 
       <div className="ui-row2">

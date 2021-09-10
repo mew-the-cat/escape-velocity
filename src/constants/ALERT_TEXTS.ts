@@ -18,13 +18,23 @@ export const ALERT_TEXTS = {
     ALERT_VARIANT.WARNING
   ),
   CRAFT_NO_ITEMS: new AlertText(
-    "Not Enough Items",
+    "No Enough Items",
     "Load at least 2 items in the Engineering Bay in order to process them.",
     ALERT_VARIANT.WARNING
   ),
   CRAFT_SUCCESS: new AlertText(
     "Engeneering Attempt Successful",
-    "You managed to process materials into a structurally more complex item.",
+    "You managed to process materials into a structurally more complex item!",
+    ALERT_VARIANT.SUCCESS
+  ),
+  CONSTRUCTION_NO_ITEMS: new AlertText(
+    "No Enough Items",
+    "Some items required in the blueprint are missing. Ensure to store them in the starhip storage [5, 5].",
+    ALERT_VARIANT.WARNING
+  ),
+  CONSTRUCTION_SUCCESS: new AlertText(
+    "Construction Successful",
+    "You have managed to build a new construction according to the blueprint!",
     ALERT_VARIANT.SUCCESS
   ),
 };
