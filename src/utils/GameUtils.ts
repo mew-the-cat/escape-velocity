@@ -1,7 +1,7 @@
 import { BLUEPRINTS } from "../constants/BLUEPRINTS";
 import { SETTINGS } from "../constants/SETTINGS";
 import { TILETYPES } from "../constants/TILETYPES";
-import { Cell } from "../models/Cell";
+import { Tile } from "../models/Tile";
 import { Phase } from "../models/Phase";
 import { Player } from "../models/Player";
 import { UserPromt } from "../models/UserPrompt";
@@ -10,7 +10,7 @@ import { Construction } from "../models/Construction";
 interface GameState {
   characters: Player[];
   phase: Phase;
-  tiles: Cell[][];
+  tiles: Tile[][];
   constructions: Construction[];
   userPrompt: UserPromt;
 }
@@ -20,7 +20,7 @@ export const generateInitialState = (): GameState => {
   for (let col = 0; col < initialTiles.length; col++) {
     initialTiles[col] = new Array(11);
     for (let row = 0; row < initialTiles[col].length; row++) {
-      initialTiles[col][row] = new Cell(TILETYPES[0], col, row);
+      initialTiles[col][row] = new Tile(TILETYPES[0], col, row);
     }
   }
 

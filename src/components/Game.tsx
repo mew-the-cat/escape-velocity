@@ -257,7 +257,7 @@ export const Game: React.FC = () => {
         updatedCharacters[0].items = items;
       }
 
-      if (result.source.droppableId === "items-cell") {
+      if (result.source.droppableId === "items-tile") {
         const items = Array.from(tiles[x][y].items);
 
         const [reorderedItem] = items.splice(result.source.index, 1);
@@ -282,7 +282,7 @@ export const Game: React.FC = () => {
 
       if (
         result.source.droppableId === "items-inventory" &&
-        result.destination.droppableId === "items-cell"
+        result.destination.droppableId === "items-tile"
       ) {
         itemsSource = Array.from(characters[0].items);
         itemsDestination = Array.from(tiles[x][y].items);
@@ -293,7 +293,7 @@ export const Game: React.FC = () => {
         updatedCharacters[0].items = itemsSource;
         updatedTiles[x][y].items = itemsDestination;
       } else if (
-        result.source.droppableId === "items-cell" &&
+        result.source.droppableId === "items-tile" &&
         result.destination.droppableId === "items-inventory"
       ) {
         if (characters[0].items.length <= characters[0].itemsMax - 1) {
@@ -337,7 +337,7 @@ export const Game: React.FC = () => {
       }
 
       if (
-        result.source.droppableId === "items-cell" &&
+        result.source.droppableId === "items-tile" &&
         result.destination.droppableId === "items-craft"
       ) {
         itemsSource = Array.from(tiles[x][y].items);
@@ -350,7 +350,7 @@ export const Game: React.FC = () => {
         updatedConstruction[0].items = itemsDestination;
       } else if (
         result.source.droppableId === "items-craft" &&
-        result.destination.droppableId === "items-cell"
+        result.destination.droppableId === "items-tile"
       ) {
         itemsSource = Array.from(constructions[0].items);
         itemsDestination = Array.from(tiles[x][y].items);

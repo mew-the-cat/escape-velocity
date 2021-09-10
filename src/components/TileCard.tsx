@@ -2,13 +2,13 @@ import styled from "styled-components";
 import { Player } from "../models/Player";
 import { Tiletype } from "../models/Tiletype";
 
-interface CellTileProps {
+interface TileCardProps {
   characters: Player[];
   tiletype: Tiletype;
   onClick: React.MouseEventHandler;
 }
 
-export const CellTile = styled.button<CellTileProps>`
+export const TileCard = styled.button<TileCardProps>`
   width: 9%;
   height: 9%;
   font-size: ${(props) => (props.characters.length === 0 ? "8px" : "8px")};

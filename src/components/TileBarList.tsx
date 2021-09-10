@@ -1,17 +1,17 @@
 import React from "react";
-import { Cell } from "../models/Cell";
+import { Tile } from "../models/Tile";
 import { Player } from "../models/Player";
 import { ItemTile } from "./ItemTile";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
-interface CellBarListProps {
+interface TileBarListProps {
   characters: Player[];
-  tiles: Cell[][];
+  tiles: Tile[][];
   onClick: (slot: number) => void;
   onDragEnd: (result: any) => void;
 }
 
-export const CellBarList: React.FC<CellBarListProps> = ({
+export const TileBarList: React.FC<TileBarListProps> = ({
   characters,
   tiles,
   onClick,
@@ -20,14 +20,14 @@ export const CellBarList: React.FC<CellBarListProps> = ({
   const y = characters[0].coords.y;
 
   return (
-    <Droppable droppableId="items-cell">
+    <Droppable droppableId="items-tile">
       {(provided) => (
         <ul {...provided.droppableProps} ref={provided.innerRef}>
           {tiles[x][y].items.map((item, index) => {
             return (
               <Draggable
                 key={index}
-                draggableId={"item-cell-" + index}
+                draggableId={"item-tile-" + index}
                 index={index}
               >
                 {(provided) => (

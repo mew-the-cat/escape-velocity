@@ -1,15 +1,15 @@
 import React from "react";
-import { Cell } from "../models/Cell";
+import { Tile } from "../models/Tile";
 import { Player } from "../models/Player";
 import { InventoryBarWrapper } from "./InventoryBarWrapper";
-import { CellBarWrapper } from "./CellBarWrapper";
+import { TileBarWrapper } from "./TileBarWrapper";
 import { DragDropContext } from "react-beautiful-dnd";
 import { CraftBarWrapper } from "./CraftBarWrapper";
 import { Construction } from "../models/Construction";
 
 interface ItemBarProps {
   characters: Player[];
-  tiles: Cell[][];
+  tiles: Tile[][];
   construction: Construction;
   onClickInventory: (slot: number) => void;
   onClickCell: (slot: number) => void;
@@ -40,7 +40,7 @@ export const ItemBar: React.FC<ItemBarProps> = ({
             </td>
 
             <td className="itemlist">
-              <CellBarWrapper
+              <TileBarWrapper
                 characters={characters}
                 tiles={tiles}
                 onClick={onClickCell}

@@ -1,9 +1,9 @@
 import React from "react";
-import { Cell } from "../models/Cell";
-import { CellTile } from "./CellTile";
+import { Tile } from "../models/Tile";
+import { TileCard } from "./TileCard";
 
 interface MapProps {
-  tiles: Cell[][];
+  tiles: Tile[][];
   onClick: (col: number, row: number) => void;
 }
 
@@ -14,7 +14,7 @@ export const Map: React.FC<MapProps> = ({ tiles, onClick }) => {
     for (let col = 0; col < tiles[row].length; col++) {
       const handleClickTileBound = onClick.bind(this, col, row);
       Cells.push(
-        <CellTile
+        <TileCard
           key={"Cell" + col + ":" + row}
           tiletype={tiles[col][row].type}
           characters={tiles[col][row].characters}
@@ -23,7 +23,7 @@ export const Map: React.FC<MapProps> = ({ tiles, onClick }) => {
           {tiles[col][row].characters.length !== 0
             ? "X"
             : "(" + col + "," + row + ")"}
-        </CellTile>
+        </TileCard>
       );
     }
     Cells.push(<br key={"LineBreak" + row} />);

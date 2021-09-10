@@ -1,16 +1,16 @@
 import React from "react";
-import { Cell } from "../models/Cell";
+import { Tile } from "../models/Tile";
 import { Player } from "../models/Player";
-import { CellBarList } from "./CellBarList";
+import { TileBarList } from "./TileBarList";
 
-interface CellBarWrapperProps {
+interface TileBarWrapperProps {
   characters: Player[];
-  tiles: Cell[][];
+  tiles: Tile[][];
   onClick: (slot: number) => void;
   onDragEnd: (result: any) => void;
 }
 
-export const CellBarWrapper: React.FC<CellBarWrapperProps> = ({
+export const TileBarWrapper: React.FC<TileBarWrapperProps> = ({
   characters,
   tiles,
   onClick,
@@ -26,7 +26,7 @@ export const CellBarWrapper: React.FC<CellBarWrapperProps> = ({
       </b>
       <br />
 
-      <CellBarList
+      <TileBarList
         characters={characters}
         tiles={tiles}
         onClick={onClick}

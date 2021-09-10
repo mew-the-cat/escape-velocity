@@ -2,7 +2,7 @@ import { Item } from "./Item";
 import { Player } from "./Player";
 import { Tiletype } from "./Tiletype";
 
-export class Cell {
+export class Tile {
   type: Tiletype;
   coords: {
     x: number;
