@@ -1,5 +1,5 @@
 import React from "react";
-import { ItemTile } from "./ItemTile";
+import { ItemCard } from "./ItemCard";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { Construction } from "../models/Construction";
 
@@ -30,7 +30,7 @@ export const CraftBarList: React.FC<CraftBarListProps> = ({
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                   >
-                    <ItemTile
+                    <ItemCard
                       type="submit"
                       value={item.name}
                       rarity={item.rarity}

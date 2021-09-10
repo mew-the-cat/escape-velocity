@@ -1,7 +1,7 @@
 import React from "react";
 import { Tile } from "../models/Tile";
 import { Player } from "../models/Player";
-import { ItemTile } from "./ItemTile";
+import { ItemCard } from "./ItemCard";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
 interface TileBarListProps {
@@ -36,7 +36,7 @@ export const TileBarList: React.FC<TileBarListProps> = ({
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                   >
-                    <ItemTile
+                    <ItemCard
                       type="submit"
                       value={tiles[x][y].items[index].name}
                       rarity={tiles[x][y].items[index].rarity}

@@ -2,14 +2,14 @@ import styled from "styled-components";
 import { Colors } from "../styles/Colors";
 import { ItemRarity } from "../types/ItemRarity";
 
-interface ItemTileProps {
+interface ItemCardProps {
   type: string;
   value: string;
   rarity: ItemRarity;
   onClick: (index: number) => void;
 }
 
-export const ItemTile = styled.input<ItemTileProps>`
+export const ItemCard = styled.input<ItemCardProps>`
   width: 80%;
   height: 40px;
   margin: 3px 3px 3px 3px;

@@ -1,6 +1,6 @@
 import React from "react";
 import { Player } from "../models/Player";
-import { ItemTile } from "./ItemTile";
+import { ItemCard } from "./ItemCard";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
 interface InventoryBarListProps {
@@ -33,7 +33,7 @@ export const InventoryBarList: React.FC<InventoryBarListProps> = ({
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                   >
-                    <ItemTile
+                    <ItemCard
                       type="submit"
                       value={item.name}
                       rarity={item.rarity}
