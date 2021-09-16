@@ -1,0 +1,19 @@
+{
+  "name": "escape-velocity-backend",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://ai-dar.github.io/escape-velocity/",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "http-status-codes": "^2.1.4",
+    "mongodb": "^4.1.2"
+  },
+  "scripts": {
+    "start": "nodemon -L server.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

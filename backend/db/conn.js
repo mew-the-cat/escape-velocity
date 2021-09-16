@@ -14,7 +14,7 @@ module.exports = {
             if (db)
             {
                 _db = db.db("escapeVelocity");
-                console.log("Successfully connected to MongoDB.");
+                console.log("Successfully connected to MongoDB at " + Db);
             }
             return callback(err);
         });
