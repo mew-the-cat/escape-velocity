@@ -1,0 +1,51 @@
+version: '3.7'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: escape-velocity-backend
+    command: npm start
+    volumes:
+      - ./backend:/app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    env_file: backend/config.env
+    environment:
+      - ATLAS_URI=mongodb://mongo:27017
+      - NODE_ENV=dev
+    networks:
+      - app-network
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+    command: mongod --quiet --logpath /dev/null
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: escape-velocity-frontend
+    command: npm start
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/public:/app/public
+      - ./frontend/src:/app/src
+      - ./frontend/tsconfig.json:/app/tsconfig.json
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
