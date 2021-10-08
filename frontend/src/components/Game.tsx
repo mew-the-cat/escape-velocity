@@ -16,6 +16,7 @@ import { CRAFT_COMBINATIONS } from "../constants/CRAFT_COMBINATIONS";
 import { ConstructionBar } from "./ConstructionBar";
 import { Blueprint } from "../models/Blueprint";
 import { randomizeDepletion } from "../utils/TileUtils";
+import { VictoryModal } from "./VictoryModal";
 
 export const Game: React.FC = () => {
   const initialState = generateInitialState();
@@ -27,9 +28,16 @@ export const Game: React.FC = () => {
     initialState.constructions
   );
   const [userPrompt, setUserPrompt] = useState(initialState.userPrompt);
+
   const [isInside, setIsInside] = useState(false);
+  const [isVisibleVictoryModal, setIsVisibleVictoryModal] = useState(false);
+  const [isTimeFrozen, setIsTimeFrozen] = useState(false);
 
   const gameLoop = () => {
+    if (isTimeFrozen) {
+      return;
+    }
+
     const updatedCharacters = [...characters];
     const updatedPhase = phase;
     const updatedUserPrompt = userPrompt;
@@ -386,6 +394,10 @@ export const Game: React.FC = () => {
     setConstructions(updatedConstruction);
   };
 
+  const handleCloseVictoryModal = () => {
+    window.location.reload();
+  };
+
   const distCellToCharacter = (col: number, row: number) => {
     return Math.max(
       Math.abs(tiles[col][row].coords.x - characters[0].coords.x),
@@ -405,7 +417,8 @@ export const Game: React.FC = () => {
 
   useEffect(() => {
     if (constructions[2].amount > 0) {
-      handleDisplayAlert(ALERT_TEXTS.VICTORY);
+      setIsTimeFrozen(true);
+      setIsVisibleVictoryModal(true);
       const updatedUserPrompt = userPrompt;
       updatedUserPrompt.untilAlertDismissed = 1200;
       setUserPrompt(updatedUserPrompt);
@@ -448,6 +461,11 @@ export const Game: React.FC = () => {
           isVisible={userPrompt.untilAlertDismissed > 0}
         />
       </div>
+
+      <VictoryModal
+        isVisible={isVisibleVictoryModal}
+        handleClose={handleCloseVictoryModal}
+      />
     </div>
   );
 };

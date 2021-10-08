@@ -7,10 +7,22 @@ interface BlueprintItemProps {
 }
 
 export const BlueprintItem = styled.div<BlueprintItemProps>`
-  color: ${(p) => p.rarity === ItemRarity.UNIQUE && Colors.ITEM_UNIQUE}
-    ${(p) => p.rarity === ItemRarity.SCARCE && Colors.ITEM_SCARCE}
-    ${(p) => p.rarity === ItemRarity.UNCOMMON && Colors.ITEM_UNCOMMON}
-    ${(p) => p.rarity === ItemRarity.COMMON && Colors.ITEM_COMMON}
-    ${(p) => p.rarity === ItemRarity.UBIQUITOUS && Colors.ITEM_UBIQUITOUS};
+  color: ${(p) => {
+    switch (p.rarity) {
+      case ItemRarity.UNIQUE:
+        return Colors.ITEM_UNIQUE + ";";
+      case ItemRarity.SCARCE:
+        return Colors.ITEM_SCARCE + ";";
+      case ItemRarity.RARE:
+        return Colors.ITEM_RARE + ";";
+      case ItemRarity.UNCOMMON:
+        return Colors.ITEM_UNCOMMON + ";";
+      case ItemRarity.COMMON:
+        return Colors.ITEM_COMMON + ";";
+      case ItemRarity.UBIQUITOUS:
+        return Colors.ITEM_UBIQUITOUS + ";";
+    }
+  }}
+
   font-weight: bold;
 `;

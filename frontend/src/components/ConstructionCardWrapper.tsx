@@ -32,6 +32,7 @@ export const ConstructionCardWrapper: React.FC<ConstructionCardWrapperProps> =
             </tr>
             {itemsToConstruct &&
               itemsToConstruct.map((item, index) => {
+                console.log(item.rarity, item.name);
                 return (
                   <tr key={index}>
                     <td colSpan={2}>

@@ -43,7 +43,7 @@ export const ALERT_TEXTS = {
     ALERT_VARIANT.SUCCESS
   ),
   VICTORY: new AlertText(
-    "Emergency Beacon is Online [VICTORY]",
+    "Emergency Beacon is Online ",
     "This piece of scrap assembled with glue and duct tape on your knees seems to work! After 4 nervous hours of waiting amid the endleess forest a rescue spacecraft appears on the horizon. Your desperate call hor help was heard. You got a ticket out of this hell!",
     ALERT_VARIANT.VICTORY
   ),
