@@ -69,10 +69,14 @@ export const generateInitialState = (): GameState => {
   const engineeringBay = new Construction(0, BLUEPRINTS[0], 1);
   const starship = new Construction(1, BLUEPRINTS[1], 1);
   const emergencyBeaconUnfinished = new Construction(2, BLUEPRINTS[2], 0);
+  const woodenBarricade = new Construction(3, BLUEPRINTS[3], 0);
+  const reinforcedBayDoors = new Construction(4, BLUEPRINTS[4], 0);
 
   initialConstructions.push(engineeringBay);
   initialConstructions.push(starship);
   initialConstructions.push(emergencyBeaconUnfinished);
+  initialConstructions.push(woodenBarricade);
+  initialConstructions.push(reinforcedBayDoors);
 
   // Initial user prompt
 

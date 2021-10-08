@@ -10,4 +10,6 @@ export const BLUEPRINTS = [
     ITEMS[5],
     ITEMS[2],
   ]),
+  new Blueprint(3, "Wooden Barricade", 30, [ITEMS[2], ITEMS[2]]),
+  new Blueprint(4, "Reinforced Bay Doors", 60, [ITEMS[5], ITEMS[5]]),
 ];
