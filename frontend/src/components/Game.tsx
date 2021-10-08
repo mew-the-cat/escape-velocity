@@ -17,6 +17,7 @@ import { ConstructionBar } from "./ConstructionBar";
 import { Blueprint } from "../models/Blueprint";
 import { randomizeDepletion } from "../utils/TileUtils";
 import { VictoryModal } from "./VictoryModal";
+import { BLUEPRINTS } from "../constants/BLUEPRINTS";
 
 export const Game: React.FC = () => {
   const initialState = generateInitialState();
@@ -181,6 +182,11 @@ export const Game: React.FC = () => {
   const handleClickConstruct = (blueprint: Blueprint) => {
     if (characters[0].ap <= 0) {
       handleDisplayAlert(ALERT_TEXTS.OUT_OF_AP);
+      return;
+    }
+
+    if (blueprint !== BLUEPRINTS[0] || blueprint !== BLUEPRINTS[1]) {
+      handleDisplayAlert(ALERT_TEXTS.CONSTRUCTION_NO_STARTING);
       return;
     }
 

@@ -37,6 +37,11 @@ export const ALERT_TEXTS = {
     "Some items required in the blueprint are missing. Ensure to store them in the starhip storage [5, 5].",
     ALERT_VARIANT.WARNING
   ),
+  CONSTRUCTION_NO_STARTING: new AlertText(
+    "Can't Amend Starting Facilities",
+    "Your starship is too complex to be engineered and patched without a proper equipment on this forsaken planet",
+    ALERT_VARIANT.WARNING
+  ),
   CONSTRUCTION_SUCCESS: new AlertText(
     "Construction Successful",
     "You have managed to build a new construction according to the blueprint!",
