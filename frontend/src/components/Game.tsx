@@ -439,46 +439,48 @@ export const Game: React.FC = () => {
   }, [constructions]);
 
   return (
-    <div className={phase.isNight ? "ui-night" : "ui-day"}>
-      <div className="ui-row1">
-        <Map tiles={tiles} onClick={handleClickTile} />
-        <ItemBar
-          characters={characters}
-          tiles={tiles}
-          construction={constructions[0]}
-          onClickInventory={handleClickItemInventory}
-          onClickCell={handleClickItemTile}
-          onDragEnd={handleDragEnd}
-          isInside={isInside}
-        />
-        {isInside && (
-          <ConstructionBar
-            constructions={constructions}
-            onClick={handleClickConstruct}
+    <div className="ui-outer">
+      <div className={phase.isNight ? "ui-night" : "ui-day"}>
+        <div className="ui-row1">
+          <Map tiles={tiles} onClick={handleClickTile} />
+          <ItemBar
+            characters={characters}
+            tiles={tiles}
+            construction={constructions[0]}
+            onClickInventory={handleClickItemInventory}
+            onClickCell={handleClickItemTile}
+            onDragEnd={handleDragEnd}
+            isInside={isInside}
           />
-        )}
-      </div>
+          {isInside && (
+            <ConstructionBar
+              constructions={constructions}
+              onClick={handleClickConstruct}
+            />
+          )}
+        </div>
 
-      <div className="ui-row2">
-        <StatusBar phase={phase} characters={characters} />
-        <ActionBar
-          isInside={isInside}
-          onClickSearch={handleClickSearch}
-          onClickCraft={handleClickCraft}
+        <div className="ui-row2">
+          <StatusBar phase={phase} characters={characters} />
+          <ActionBar
+            isInside={isInside}
+            onClickSearch={handleClickSearch}
+            onClickCraft={handleClickCraft}
+          />
+        </div>
+
+        <div className="ui-row3">
+          <AlertBar
+            alertText={userPrompt.alertActive}
+            isVisible={userPrompt.untilAlertDismissed > 0}
+          />
+        </div>
+
+        <VictoryModal
+          isVisible={isVisibleVictoryModal}
+          handleClose={handleCloseVictoryModal}
         />
       </div>
-
-      <div className="ui-row3">
-        <AlertBar
-          alertText={userPrompt.alertActive}
-          isVisible={userPrompt.untilAlertDismissed > 0}
-        />
-      </div>
-
-      <VictoryModal
-        isVisible={isVisibleVictoryModal}
-        handleClose={handleCloseVictoryModal}
-      />
     </div>
   );
 };
