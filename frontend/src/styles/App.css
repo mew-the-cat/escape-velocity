@@ -10,11 +10,24 @@ li {
   padding-left: 0;
 }
 
-.ui {
+.ui-day {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   padding: 12px;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(236, 249, 242);
+}
+
+.ui-night {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 12px;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(79, 109, 104);
 }
 
 .ui-row1 {

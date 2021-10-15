@@ -439,7 +439,7 @@ export const Game: React.FC = () => {
   }, [constructions]);
 
   return (
-    <div className="ui">
+    <div className={phase.isNight ? "ui-night" : "ui-day"}>
       <div className="ui-row1">
         <Map tiles={tiles} onClick={handleClickTile} />
         <ItemBar
