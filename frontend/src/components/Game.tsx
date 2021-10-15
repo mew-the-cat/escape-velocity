@@ -50,6 +50,13 @@ export const Game: React.FC = () => {
       updatedPhase.untilNextTurn = SETTINGS.DURATION_TURN - 1;
       updatedCharacters[0].ap < SETTINGS.PLAYER_AP_MAX &&
         (updatedCharacters[0].ap += 1);
+
+      if (updatedPhase.untilDaytimeChange > 0) {
+        updatedPhase.untilDaytimeChange -= 1;
+      } else {
+        updatedPhase.untilDaytimeChange = SETTINGS.DURATION_DAYNIGHT_CYCLE - 1;
+        updatedPhase.isNight = !updatedPhase.isNight;
+      }
     }
 
     if (updatedUserPrompt.untilAlertDismissed > 0) {

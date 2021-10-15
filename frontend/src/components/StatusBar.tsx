@@ -13,7 +13,8 @@ export const StatusBar: React.FC<StatusBarProps> = ({ phase, characters }) => {
     <span className="statusbar">
       <b>Status bar</b>
       <br />
-      Turn: {phase.turn} (00:00:0{phase.untilNextTurn})
+      Turn: {phase.turn} (00:00:0{phase.untilNextTurn}){" "}
+      <b>{phase.isNight ? "NIGHT" : "DAY"}</b>
       <br />
       Action Points: {characters[0].ap} / {SETTINGS.PLAYER_AP_MAX}
       <br />
